@@ -1,0 +1,24 @@
+.appchannelspanel {
+    background-color: rgba(10, 10, 10, .7);
+    padding: 2px 5px;
+    border-radius: 4px;
+    height: 30px;
+    width: 1042px;
+    margin-bottom: 3px;
+    align-items: center;
+    
+    &__item {
+        font-size: 10px;
+        background-color:black;
+        color: rgb(198, 215, 216);
+        cursor: pointer;
+        margin: 0 2px;
+        letter-spacing: 1px;
+        height: 20px;
+        padding: 0 5px;
+        // border: 3px;
+        text-decoration: none;
+        border-radius: 2px;
+        
+    }
+}
