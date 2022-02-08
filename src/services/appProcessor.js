@@ -1,6 +1,15 @@
 import { canvasRender, canvasDraw } from "../components/appVisualDisplay/appDisplayDrawingProcessor";
 import store from '../store';
 
+if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
+    console.log("Let's get this party started")
+  }
+
+// navigator.getUserMedia = (navigator.getUserMedia || 
+//     navigator.webkitGetUserMedia || 
+//     navigator.mozGetUserMedia || 
+//     navigator.msGetUserMedia);
+
 var analyser,
     src,
     ctx = null,
@@ -20,13 +29,30 @@ function initState() {
     fillStatus = store.getState().fillStatus
 } initState();
 
+function analyserInitiate(){
+    if(ctx) return;
+
+    navigator.mediaDevices.getUserMedia({
+        audio: true
+    }).then(stream => {
+        ctx = new AudioContext();
+        analyser = ctx.createAnalyser();
+        src = ctx.createMediaStreamSource(stream);
+        src.connect(analyser);
+        appProceccor();
+    }).catch(error => {    
+        alert(error + '\r\n\ Отклонено.');
+        analyserInitiate();
+        console.log('ok')
+    });
+}
 
 function appProceccor() {
     requestAnimationFrame(appProceccor)
     if(ctx) {
         analyser.getByteFrequencyData(data);
     }
-       
+    
     if(pause === 0){
         analyserInitiate();
         pause = 30;
@@ -43,25 +69,6 @@ function appProceccor() {
         if(onceStartRender) {canvasRender();onceStartRender = false;}
         if(data) canvasDraw(data, rate, fillStatus, renderColor, peaksStatus);
     }
-}
-
-const analyserInitiate = () => {
-    ctx = new AudioContext();
-    analyser = ctx.createAnalyser();
-    
-    navigator.getUserMedia = (navigator.getUserMedia || 
-    navigator.webkitGetUserMedia || 
-    navigator.mozGetUserMedia || 
-    navigator.msGetUserMedia);
-
-    navigator.mediaDevices.getUserMedia({
-        audio: true
-    }).then(stream => {
-        src = ctx.createMediaStreamSource(stream);
-        src.connect(analyser);
-    }).catch(error => {    
-        alert(error + '\r\n\ Отклонено.');
-    });
 }
 
 export { appProceccor, initState, analyserInitiate };

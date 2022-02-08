@@ -6,23 +6,21 @@
     border-radius: 4px;
     display: flex;
     justify-content: space-between;
-}
-
-.title {
+    &__title {
         font-family: "Orbitron", sans-serif;
         font-size: 32px;
         font-weight: bold;
         text-shadow: 5px 5px 1px black;
     }
-.info {
-    font-family: "mini";
-        font-size: 6px;
-        text-shadow: 1px 1px 1px black;
-        width: 440px;
-        background-color: rgb(44, 51, 51);
-        box-shadow: 2px 2px 1px black;
-        letter-spacing: 2px;
-        padding: 2px;
-        margin-top: 4px;        
+    &__info {
+        font-family: "mini";
+            font-size: 6px;
+            text-shadow: 1px 1px 1px black;
+            width: 440px;
+            background-color: rgb(44, 51, 51);
+            box-shadow: 2px 2px 1px black;
+            letter-spacing: 2px;
+            padding: 2px;
+            margin-top: 4px;        
     }
-
+}

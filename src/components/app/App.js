@@ -1,16 +1,16 @@
 import { lazy, Suspense } from "react";
-import { appProceccor } from "../../services/appProcessor";
+import { analyserInitiate } from "../../services/appProcessor";
 
 const MainPage = lazy(() => import('../pages/MainPage'));
 
-appProceccor();
+analyserInitiate();
 
 const App = () => {
   return (
     <div className="app">
         <main>
             <Suspense fallback="Loading...">
-              <MainPage/>
+              <MainPage/>              
             </Suspense>                   
         </main>      
     </div>

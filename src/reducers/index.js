@@ -1,6 +1,6 @@
 const initialState = {
-    renderColor: '255,255,0',
-    rate: 93,
+    renderColor: '0,255,0',
+    rate: 255,
     peaksStatus: 1,
     fillStatus: 0
 }
