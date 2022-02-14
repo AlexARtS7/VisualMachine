@@ -1,8 +1,16 @@
+import store from '../../store';
+
 var ctx;
 let peaksX = [],
     peaksW = [],
     peaksA = [],
-    peaksC = [];
+    peaksC = [],
+    channels = [],
+    channelsColor = [];
+
+function initChannels() {
+    channels = store.getState().channels
+} initChannels();
 
 function zeroPeaks(){
     for (let p = 0; p < 256 ; p++ ){
@@ -26,15 +34,29 @@ const canvasDraw = (data,visMode, fillStatus, renderColor, peaksStatus) => {
     const vrbDrawing = (data, max, marginLeft, margin, width) => {
         ctx.fillStyle = '#000000';
         ctx.fillRect(2, 5, 1028, 148)
+        channelsColor = [];
+        let colorItems = renderColor;
+
+        channels.forEach((item, u) => {
+            for(let f = item.min; f <= item.max ; f++){
+                channelsColor[f] = channels[u].color
+            }
+        })
+
         for ( let i = 0 ; i < max ; i++) {
             let vrbData = data[i]/1.8;
             if(vrbData > 140) vrbData = 140;
-    
+            if(channelsColor[i]) {
+                colorItems = channelsColor[i]
+            } else {
+                colorItems = renderColor;
+            }
+
             if (fillStatus){
-                ctx.fillStyle = `rgba( ${renderColor}, ${0.02 * vrbData} )`
+                ctx.fillStyle = `rgba( ${colorItems}, ${0.02 * vrbData/2} )`
                 ctx.fillRect(marginLeft+margin*i*2, 151.5, width, -vrbData);
             } else {
-                ctx.strokeStyle = `rgba( ${renderColor}, ${0.02 * vrbData} )`
+                ctx.strokeStyle = `rgba( ${colorItems}, ${0.02 * vrbData/2} )`
                 ctx.strokeRect(marginLeft+margin*i*2, 151.5, width, -vrbData);
             }
             
@@ -46,7 +68,7 @@ const canvasDraw = (data,visMode, fillStatus, renderColor, peaksStatus) => {
                 peaksA[i] = 0;
                 peaksC[i] = 1
             } 
-            ctx.fillStyle = `rgba( ${renderColor}, ${peaksC[i]})`;
+            ctx.fillStyle = `rgba( ${colorItems}, ${peaksC[i]})`;
             ctx.fillRect(marginLeft+margin*i*2, 151.5 - peaksX[i], width, 1);        
             
                 if (peaksW[i] > 0 ) {
@@ -60,21 +82,17 @@ const canvasDraw = (data,visMode, fillStatus, renderColor, peaksStatus) => {
         }
     }
 
-    switch (visMode) { //  (data, max, marginLeft, margin, width)
-
+    switch (visMode) {
         case 255:  vrbDrawing(data, 255, 7, 2, 3)
-        break;
-
+          break;
         case 204:  vrbDrawing(data, 204, 7, 2.5, 4)
-        break;
-
-        case 93:  vrbDrawing(data, 93, 6, 5.5, 10)
-        break;
-
+          break;
+        case 92:  vrbDrawing(data, 93, 6, 5.5, 10)
+          break;
         case 44:  vrbDrawing(data, 44, 11, 11.5, 22)
-        break;
+          break;
         default://
     }
 }
 
-export {canvasRender, canvasDraw};
+export {canvasRender, canvasDraw, initChannels};

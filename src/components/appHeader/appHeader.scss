@@ -1,9 +1,5 @@
-@import '../../style/variables.scss';
-
 .appheadersheet {
-    background-color: rgba(10, 10, 10, .7);
     padding: 5px 20px;
-    border-radius: 4px;
     display: flex;
     justify-content: space-between;
     &__title {

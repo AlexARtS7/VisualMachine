@@ -7,7 +7,7 @@ const MainPage = () => {
     return (
         <div>
             <AppHeader/>
-            <div className="backsheet">
+            <div className="app__backsheet">
                 <AppVisualDisplay/>
                 <AppChannelList/>   
             </div>                            

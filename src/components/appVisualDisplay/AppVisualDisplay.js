@@ -8,7 +8,7 @@ import './appVisualDisplay.scss';
 const AppVisualDisplay = () => { 
     const dispatch = useDispatch();
 
-    const {rate, fillStatus, renderColor, peaksStatus} = useSelector(state => state)
+    const {rate, fillStatus, renderColor, peaksStatus, channels} = useSelector(state => state)
 
     const freq = () =>{
         let cons
@@ -45,34 +45,44 @@ const AppVisualDisplay = () => {
 
     useEffect(()=>{
         initState();
-    }) //, [mode]
+    })
+
+    const onChangeRate = (event) => {
+        dispatch({type: 'CHANGE_VISMODE', rate: event.value})
+        channels.forEach((item, i) => {
+            if(item.max > +event.value) {
+                dispatch({type: 'CHANGE_MAX_CHANNEL', max: event.value, id: i})
+            }
+            if(item.min > +event.value) {
+                dispatch({type: 'CHANGE_MIN_CHANNEL', min: event.value, id: i})
+            }
+        });
+    }
 
     return (
-        <div className="appvisualdisplaysheet">
+        <div className="app__sheet appvisualdisplaysheet">
             <div>
-                <span className="appvisualdisplaysheet__title">VisualDisplay</span>
+                <span className="app__title">VisualDisplay</span>
                 <select 
                 value={rate} 
-                className="appvisualdisplaysheet__item" 
-                onChange={(e) => dispatch({type: 'CHANGE_VISMODE', payload: e.target.value})}>
+                className="app__item" 
+                onChange={(e) => onChangeRate(e.target)}>
                      <option value="255">Mode: 255 samples</option>
                      <option value="204">Mode: 204 samples</option>
-                     <option value="93">Mode: 93 samples</option>
+                     <option value="92">Mode: 92 samples</option>
                      {/* <option value="44">Mode: 45 samples</option> */}
                 </select>
                 <select 
                 value={fillStatus}
-                className="appvisualdisplaysheet__item"
-                onChange={(e) => dispatch({type: 'CHANGE_FILL_STATUS', payload: e.target.value})}>
+                className="app__item"
+                onChange={(e) => dispatch({type: 'CHANGE_FILL_STATUS', fill: e.target.value})}>
                      <option value="1">Render: Fill</option>
                      <option value="0">Render: Stroke</option>
                 </select>
                 <select 
                 value={renderColor}
-                className="appvisualdisplaysheet__item"
-                onChange={(e) => dispatch({type: 'CHANGE_COLOR', payload: e.target.value})}
-                > 
-                     <option value="255,255,255">Color: White</option>
+                className="app__item"
+                onChange={(e) => dispatch({type: 'CHANGE_COLOR', color: e.target.value})}> 
                      <option value="0,0,255">Color: Blue</option>
                      <option value="255,0,0">Color: Red</option>
                      <option value="0,255,0">Color: Green</option>
@@ -81,8 +91,8 @@ const AppVisualDisplay = () => {
                 </select>
                 <select 
                 value={peaksStatus}
-                className="appvisualdisplaysheet__item"
-                onChange={(e) => dispatch({type: 'CHANGE_PEAKS_STATUS', payload: e.target.value})}>
+                className="app__item"
+                onChange={(e) => dispatch({type: 'CHANGE_PEAKS_STATUS', peaks: e.target.value})}>
                      <option value="1">Peaks: Yes</option>
                      <option value="0">Peaks: No</option>
                 </select>

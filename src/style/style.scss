@@ -7,10 +7,10 @@
     src: url(../resources/fonts/Mini.ttf);
 }
 
-// @font-face {
-//     font-family: 'middle';
-//     src: url(../resources/fonts/Middle.ttf);
-// }
+@font-face {
+    font-family: 'middle';
+    src: url(../resources/fonts/Middle.ttf);
+}
 
 * {
     font-family:  "Open Sans", sans-serif;
@@ -37,24 +37,43 @@ h6 {
 }
 
 .app {
-    width: 100%;
+    min-width: 100%;
     min-height: 100vh;
     height: 100%;
     background-color: $dark;
     padding: 1px 10px;
+    &__backsheet {
+        margin-top: 10px;
+        background-color: $sheet;
+        color: $textcolor;
+        padding: 1px;
+        box-shadow: 5px 5px 1px black;
+        border-radius: 4px;
+        background-image: url("https://catherineasquithgallery.com/uploads/posts/2021-02/1614403895_55-p-temnii-fon-dlya-bannera-65.jpg");
+    }
+    &__flex {
+        display: flex;
+        // justify-content: stretch;
+    }
+    &__sheet {
+        background-color: $sheetcolor;
+        border-radius: 4px;
+        margin: 1px;
+    }
+    &__title {
+        font-family:  "Orbitron";
+        font-size: 14px;
+        margin-left: 10px;
+        margin-right: 20px;
+    }
+    &__item {
+        font-size: 10px;
+        background-color:black;
+        color: $textcolor;
+        cursor: pointer;
+        margin: 0 2px;
+        letter-spacing: 1px;
+    }
 }
 
-.backsheet {
-    margin-top: 10px;
-    background-color: $sheet;
-    color: rgb(198, 215, 216);
-    padding: 2px;
-    box-shadow: 5px 5px 1px black;
-    border-radius: 4px;
-    background-image: url("https://catherineasquithgallery.com/uploads/posts/2021-02/1614403895_55-p-temnii-fon-dlya-bannera-65.jpg");
-}
 
-.flex {
-    display: flex;
-    // justify-content: stretch;
-}
