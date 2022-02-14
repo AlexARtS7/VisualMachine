@@ -27,7 +27,7 @@
         min-width: 20px;
         background-color:black;
         color: $textcolor;
-        padding: 0 5px;
+        padding: 0 16px;
     }
     &__item {
         font-size: 10px;
@@ -52,8 +52,53 @@
         border: 0.5px solid #ffffff;
         border-radius: 5px;
     }
+    &__renderarea {
+        width: 250px;
+        height: 56px;
+        padding: 2px;
+        position: relative;
+    }
+    &__triggeringarea {
+        width: 65px;
+        height: 56px;
+        padding: 2px;
+        position: relative;
+    }
 }
 
 .ml {
     margin-left: 10px;
+}
+
+.div {
+    // width: 20px;
+    height: 50px;
+    background-color:#ffffff;
+    border-radius: 2px;
+}
+
+.indicator {
+    height: 52px;
+    width: 3px;
+    position: absolute;
+    z-index: 100;
+    top: 1px;
+    background-color: #ffffff;
+    border: 1px solid black;
+}
+
+.markers {
+    height: 8px;
+    width: 3px;
+    position: absolute;    
+    background-color: #ffffff;
+    border: 1px solid black;
+    font-family: "mini";
+    font-size: 8px;
+}
+.up {
+    top: 1px;
+}
+.down {
+    bottom: 2px;
 }

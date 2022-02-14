@@ -1,32 +1,29 @@
-import { canvasRender, canvasDraw } from "../components/appVisualDisplay/appDisplayDrawingProcessor";
+import { canvasRender, canvasDraw } from "../services/appDisplayDrawingProcessor";
+import { sampleDrawing } from "./appSampleDrawingProcessor";
 import store from '../store';
 
 if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
     console.log("Let's get this party started")
   }
 
-// navigator.getUserMedia = (navigator.getUserMedia || 
-//     navigator.webkitGetUserMedia || 
-//     navigator.mozGetUserMedia || 
-//     navigator.msGetUserMedia);
-
 var analyser,
+    renderColor,
+    rate,
+    peaksStatus,
+    fillStatus,
+    channels,
     src,
     ctx = null,
     pause = 0, 
     onceStartRender = true,
     data = new Uint8Array(256);
 
-let renderColor,
-    rate,
-    peaksStatus,
-    fillStatus
-
 function initState() {
     renderColor = store.getState().renderColor
     rate = store.getState().rate
     peaksStatus = store.getState().peaksStatus
     fillStatus = store.getState().fillStatus
+    channels = store.getState().channels
 } initState();
 
 function analyserInitiate(){
@@ -56,19 +53,24 @@ function appProceccor() {
     if(pause === 0){
         analyserInitiate();
         pause = 30;
-        // console.log('init')
     } else if(pause < 100) {
         if(data[0] > 0) {
             pause = 200
-            // console.log('init ok')
         };
         pause -= 1;
     }
     
-    if( document.getElementById('canvasDisplay')){
+    if( document.getElementById('canvasDisplay') ){
         if(onceStartRender) {canvasRender();onceStartRender = false;}
         if(data) canvasDraw(data, rate, fillStatus, renderColor, peaksStatus);
     }
+
+    channels.forEach((item, i) => {
+        const div = document.getElementById(`div${i}`);
+        if( div ){
+            sampleDrawing(data, item, i, div);
+        }
+    })
 }
 
 export { appProceccor, initState, analyserInitiate };

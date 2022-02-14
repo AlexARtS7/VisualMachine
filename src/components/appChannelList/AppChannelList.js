@@ -11,7 +11,10 @@ const AppChannelList = () => {
                 mark={item.mark}
                 key={i}
                 id={i}
-                assemble={item.assemble}/>
+                assemble={item.assemble}
+                rear={item.rear}
+                front={item.front}
+                reaction={item.reaction}/>
     })
 
     return (

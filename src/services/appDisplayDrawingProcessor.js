@@ -1,4 +1,4 @@
-import store from '../../store';
+import store from '../../src/store';
 
 var ctx;
 let peaksX = [],
@@ -30,7 +30,6 @@ const canvasRender = () => {
 }
 
 const canvasDraw = (data,visMode, fillStatus, renderColor, peaksStatus) => {
-
     const vrbDrawing = (data, max, marginLeft, margin, width) => {
         ctx.fillStyle = '#000000';
         ctx.fillRect(2, 5, 1028, 148)
@@ -53,10 +52,10 @@ const canvasDraw = (data,visMode, fillStatus, renderColor, peaksStatus) => {
             }
 
             if (fillStatus){
-                ctx.fillStyle = `rgba( ${colorItems}, ${0.02 * vrbData/2} )`
+                ctx.fillStyle = `rgba( ${colorItems}, ${0.02 * vrbData} )`
                 ctx.fillRect(marginLeft+margin*i*2, 151.5, width, -vrbData);
             } else {
-                ctx.strokeStyle = `rgba( ${colorItems}, ${0.02 * vrbData/2} )`
+                ctx.strokeStyle = `rgba( ${colorItems}, ${0.02 * vrbData} )`
                 ctx.strokeRect(marginLeft+margin*i*2, 151.5, width, -vrbData);
             }
             
@@ -95,4 +94,4 @@ const canvasDraw = (data,visMode, fillStatus, renderColor, peaksStatus) => {
     }
 }
 
-export {canvasRender, canvasDraw, initChannels};
+export {canvasRender, canvasDraw };

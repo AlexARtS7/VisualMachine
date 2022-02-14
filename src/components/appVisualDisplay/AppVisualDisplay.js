@@ -88,6 +88,13 @@ const AppVisualDisplay = () => {
                      <option value="0,255,0">Color: Green</option>
                      <option value="0,255,255">Color: Aqua</option>
                      <option value="255,255,0">Color: Yellow</option>
+                     <option value="0, 100, 0">Color: DarkGreen</option>
+                     <option value="128, 128, 0">Color: Olive</option>
+                     <option value="255, 165, 0">Color: Orange</option>
+                     <option value="95, 158, 160">Color: CadetBlue</option>
+                     <option value="128, 0, 128">Color: Purple</option>
+                     <option value="154, 205, 50">Color: YellowGreen</option>
+                     <option value="189, 183, 107">Color: DarkKhaki</option>
                 </select>
                 <select 
                 value={peaksStatus}
@@ -97,18 +104,12 @@ const AppVisualDisplay = () => {
                      <option value="0">Peaks: No</option>
                 </select>
             </div>
-            <Canvas/>
+            <canvas id='canvasDisplay'></canvas>
             <div className="appvisualdisplaysheet__center">
                 <div className="appvisualdisplaysheet__freq">{freq()}</div>
             </div>            
         </div>
     )
-}
-
-const Canvas = () => {
-    return (
-        <canvas id='canvasDisplay'></canvas>
-    )    
 }
 
 export default AppVisualDisplay;
