@@ -3,7 +3,7 @@
     - visualization of the sound spectrum,
     - visualization of channels tuned to a certain frequency,
     - rendering the sound spectrum using.
-![image](https://user-images.githubusercontent.com/95174979/153950985-e7b67a83-9a82-4d37-a643-8d9d08a77838.png)
+![image](https://user-images.githubusercontent.com/95174979/154151930-2445abfc-88c9-4485-a198-f2f92724c782.png)
 
 # How to configure
 
