@@ -6,7 +6,8 @@ let peaksX = [],
     peaksA = [],
     peaksC = [],
     channels = [],
-    channelsColor = [];
+    channelsColor = [],
+    markers = [];
 
 function initChannels() {
     channels = store.getState().channels
@@ -17,6 +18,16 @@ function zeroPeaks(){
         peaksX[p] = 0;        
     }
 } zeroPeaks();
+
+function initMarkers(){
+    markers = [];
+    channels.forEach((item, u) => {
+        for(let f = item.min; f <= item.max ; f++){
+            markers[f] = channels[u].color
+            
+        }
+    })
+} initMarkers();
 
 const canvasRender = () => {
     const canvas = document.getElementById("canvasDisplay");
@@ -29,33 +40,26 @@ const canvasRender = () => {
     ctx.strokeRect(5.5, 155.5, 1022, 3);
 }
 
-const canvasDraw = (data,visMode, fillStatus, renderColor, peaksStatus) => {
+const canvasDraw = (data, visMode, fillStatus, renderColor, peaksStatus) => {
     const vrbDrawing = (data, max, marginLeft, margin, width) => {
         ctx.fillStyle = '#000000';
-        ctx.fillRect(2, 5, 1028, 148)
-        channelsColor = [];
-        let colorItems = renderColor;
+        ctx.fillRect(2, 5, 1028, 148) 
 
-        channels.forEach((item, u) => {
-            for(let f = item.min; f <= item.max ; f++){
-                channelsColor[f] = channels[u].color
-            }
-        })
-
+        //assemblerendering
         for ( let i = 0 ; i < max ; i++) {
             let vrbData = data[i]/1.8;
             if(vrbData > 140) vrbData = 140;
-            if(channelsColor[i]) {
-                colorItems = channelsColor[i]
-            } else {
-                colorItems = renderColor;
+
+            if(markers[i]){
+                ctx.fillStyle = `rgba( ${markers[i]}, ${0.005 * vrbData} )`
+                ctx.fillRect(marginLeft+margin*i*2, 151.5, width, -144);
             }
 
             if (fillStatus){
-                ctx.fillStyle = `rgba( ${colorItems}, ${0.02 * vrbData} )`
+                ctx.fillStyle = `rgba( ${renderColor}, ${0.02 * vrbData} )`
                 ctx.fillRect(marginLeft+margin*i*2, 151.5, width, -vrbData);
             } else {
-                ctx.strokeStyle = `rgba( ${colorItems}, ${0.02 * vrbData} )`
+                ctx.strokeStyle = `rgba( ${renderColor}, ${0.02 * vrbData} )`
                 ctx.strokeRect(marginLeft+margin*i*2, 151.5, width, -vrbData);
             }
             
@@ -67,7 +71,7 @@ const canvasDraw = (data,visMode, fillStatus, renderColor, peaksStatus) => {
                 peaksA[i] = 0;
                 peaksC[i] = 1
             } 
-            ctx.fillStyle = `rgba( ${colorItems}, ${peaksC[i]})`;
+            ctx.fillStyle = `rgba( ${renderColor}, ${peaksC[i]})`;
             ctx.fillRect(marginLeft+margin*i*2, 151.5 - peaksX[i], width, 1);        
             
                 if (peaksW[i] > 0 ) {
@@ -94,4 +98,4 @@ const canvasDraw = (data,visMode, fillStatus, renderColor, peaksStatus) => {
     }
 }
 
-export {canvasRender, canvasDraw };
+export {canvasRender, canvasDraw, initMarkers };

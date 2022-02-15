@@ -60,17 +60,18 @@ function appProceccor() {
         pause -= 1;
     }
     
-    if( document.getElementById('canvasDisplay') ){
-        if(onceStartRender) {canvasRender();onceStartRender = false;}
-        if(data) canvasDraw(data, rate, fillStatus, renderColor, peaksStatus);
-    }
-
-    channels.forEach((item, i) => {
+   
+    channels.forEach((item, i) => {        
         const div = document.getElementById(`div${i}`);
         if( div ){
             sampleDrawing(data, item, i, div);
         }
     })
+
+    if( document.getElementById('canvasDisplay') ){
+        if(onceStartRender) {canvasRender();onceStartRender = false;}
+        if(data) canvasDraw(data, rate, fillStatus, renderColor, peaksStatus);
+    }    
 }
 
 export { appProceccor, initState, analyserInitiate };

@@ -52,7 +52,8 @@ const sampleDrawing = (data, item, id, div) => {
         document.getElementById(`in${id}`).style.left = `${xPos[id]}px`;
 
         div.style.width = `${mass}px`;
-        div.style.backgroundColor = `rgba(${item.color}, 0.7)`;            
+        // div.style.backgroundColor = `rgba(${item.color}, ${0.08 * data[id]})`;    
+        div.style.background = `linear-gradient(to top, #000000, rgb(${item.color}), #000000)`;        
 }
 
 export {sampleDrawing};

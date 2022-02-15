@@ -1,3 +1,5 @@
+@import '../../style/variables';
+
 .appheadersheet {
     padding: 5px 20px;
     display: flex;
@@ -7,6 +9,8 @@
         font-size: 32px;
         font-weight: bold;
         text-shadow: 5px 5px 1px black;
+        user-select: none;
+        color: $textcolor;
     }
     &__info {
         font-family: "mini";
@@ -17,6 +21,8 @@
             box-shadow: 2px 2px 1px black;
             letter-spacing: 2px;
             padding: 2px;
-            margin-top: 4px;        
+            margin-top: 4px;  
+            user-select: none;   
+            color: $textcolor;   
     }
 }

@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
+import { initMarkers } from '../../services/appDisplayDrawingProcessor';
 
 const AppChannelItem = ({min, max, mark, id, assemble, rear, front, reaction}) => { 
     const {rate, channels} = useSelector(state => state)
@@ -36,7 +37,8 @@ const AppChannelItem = ({min, max, mark, id, assemble, rear, front, reaction}) =
             calibreMinMax(event);
         } else {
             dispatch({type: 'CHANGE_MIN_CHANNEL', min: event.value, id: event.id})
-        }        
+        } 
+        initMarkers();       
     }
 
     const changeMax = (event) => {
@@ -44,11 +46,13 @@ const AppChannelItem = ({min, max, mark, id, assemble, rear, front, reaction}) =
             calibreMinMax(event);
         } else {
             dispatch({type: 'CHANGE_MAX_CHANNEL', max: event.value, id: event.id})
-        }        
+        }  
+        initMarkers();      
     }
 
     const changeSampleColor = (event) => {
         dispatch({type: 'CHANGE_SAMPLE_COLOR', color: event.value, id: event.id})
+        initMarkers();
     }
 
     const assembleChange = (event) => {
@@ -68,35 +72,47 @@ const AppChannelItem = ({min, max, mark, id, assemble, rear, front, reaction}) =
         dispatch({type: 'CHANGE_REACTION', reaction: event.value, id: event.id})
     }
 
+    const deleteChannel = (event) => {
+        dispatch({type: 'DELETE_SELECTED_CHANNEL', id: event.id})
+        initMarkers();
+    }
+
     return (
-        <div className="app__sheet appchannellist">
-            <div>
-                <span className="app__title">Channel : {mark}</span>
+        <div className="app__sheet channellist">
+            <div className='app__flex__between'>
+                <div className="app__title">Channel : {mark}</div>
+                <div>
                 <select
-                className="app__item"
-                id={id}
-                onChange={(e) => changeSampleColor(e.target)}> 
-                     <option value="255,255,255">Color: White</option>
-                     <option value="0,0,255">Color: Blue</option>
-                     <option value="255,0,0">Color: Red</option>
-                     <option value="0,255,0">Color: Green</option>
-                     <option value="0,255,255">Color: Aqua</option>
-                     <option value="255,255,0">Color: Yellow</option>
-                     <option value="0, 100, 0">Color: DarkGreen</option>
-                     <option value="128, 128, 0">Color: Olive</option>
-                     <option value="255, 165, 0">Color: Orange</option>
-                     <option value="95, 158, 160">Color: CadetBlue</option>
-                     <option value="128, 0, 128">Color: Purple</option>
-                     <option value="154, 205, 50">Color: YellowGreen</option>
-                     <option value="189, 183, 107">Color: DarkKhaki</option>
+                    value={channels[id].color}
+                    id={id}
+                    onChange={(e) => changeSampleColor(e.target)}>
+                        <option value="0,0,255">Color: Blue</option>
+                        <option value="255,0,0">Color: Red</option>
+                        <option value="0,255,0">Color: Green</option>
+                        <option value="0,255,255">Color: Aqua</option>
+                        <option value="255,255,0">Color: Yellow</option>
+                        <option value="0, 100, 0">Color: DarkGreen</option>
+                        <option value="128, 128, 0">Color: Olive</option>
+                        <option value="255, 165, 0">Color: Orange</option>
+                        <option value="95, 158, 160">Color: CadetBlue</option>
+                        <option value="128, 0, 128">Color: Purple</option>
+                        <option value="154, 205, 50">Color: YellowGreen</option>
+                        <option value="189, 183, 107">Color: DarkKhaki</option>
                 </select>
+                {id > 0 ? <button 
+                        className='closebutton' 
+                        id={id}
+                        onClick={(e) => deleteChannel(e.target)}
+                        >DELETE CHANNEL</button>: null}
+                    
+                </div>              
             </div>            
-            <div className="appchannellist__line"></div>
-            <div className="app__flex">
-                <div className="appchannellist__center">
-                    <div className="appchannellist__navtext">Start</div>
+            <div className="app__line"></div>
+            <div className="app__flex__between">
+                <div className="channellist__center">
+                    <div className="app__navtext">Start</div>
                     <select 
-                        className="appchannellist__select" 
+                        className="channellist__select" 
                         size={4}
                         value={min}
                         id={id}
@@ -104,10 +120,10 @@ const AppChannelItem = ({min, max, mark, id, assemble, rear, front, reaction}) =
                         {elements()}
                     </select>
                 </div>
-                <div className="appchannellist__center">
-                    <div className="appchannellist__navtext">End</div>
+                <div className="channellist__center">
+                    <div className="app__navtext">End</div>
                     <select 
-                        className="appchannellist__select" 
+                        className="channellist__select" 
                         size={4}
                         value={max}
                         id={id}
@@ -115,27 +131,27 @@ const AppChannelItem = ({min, max, mark, id, assemble, rear, front, reaction}) =
                         {elements()}
                     </select>
                 </div>
-                <div className="appchannellist__center ml">
-                    <div className='appchannellist__navtext'>startpoint</div>
-                    <div className='appchannellist__bkg appchannellist__text'>{channels[id].min}</div>
-                    <div className='appchannellist__navtext'>endpoint</div>
-                    <div className='appchannellist__bkg appchannellist__text'>{channels[id].max}</div>
+                <div className="channellist__center ml">
+                    <div className='app__navtext'>startpoint</div>
+                    <div className='channellist__bkg channellist__text'>{channels[id].min}</div>
+                    <div className='app__navtext'>endpoint</div>
+                    <div className='channellist__bkg channellist__text'>{channels[id].max}</div>
                 </div>
-                <div className="appchannellist__center ml">
-                    <div className='appchannellist__navtext'>channelAssemble</div>
+                <div className="channellist__center ml">
+                    <div className='app__navtext'>channelAssemble</div>
                     <select                 
-                        className="appchannellist__select"
+                        className="channellist__select"
                         id={id}
                         size={4}
                         value={assemble}
                         onChange={(e) => assembleChange(e.target)}> 
                             <option value="average">average of a samples</option>
-                            <option value="maximum">maximum of a semples</option>
+                            <option value="maximum">maximum of a samples</option>
                     </select>
                 </div>
-                <div className="appchannellist__center ml">
-                    <div className='appchannellist__navtext'>visualrendering</div>
-                    <div className='appchannellist__renderarea appchannellist__bkg'>    
+                <div className="channellist__center ml">
+                    <div className='app__navtext'>visualrendering</div>
+                    <div className='channellist__renderarea channellist__bkg'>    
                         <div className='div' id={divId}></div>
                         <div className='indicator' id={inId}></div>
                         <div className='markers up' id={ufId}></div>
@@ -144,14 +160,14 @@ const AppChannelItem = ({min, max, mark, id, assemble, rear, front, reaction}) =
                         <div className='markers down' id={drId}></div>
                     </div>
                 </div>
-                <div className="appchannellist__center ml">
-                    <div className='appchannellist__navtext'>triggering</div>
-                    <div className='appchannellist__triggeringarea appchannellist__bkg' id={trId}></div> 
+                <div className="channellist__center ml">
+                    <div className='app__navtext'>triggering</div>
+                    <div className='channellist__triggeringarea channellist__bkg' id={trId}></div> 
                 </div>            
-                    <div className="appchannellist__center ml">
-                        <div className="appchannellist__navtext">rearbuf</div>
+                    <div className="channellist__center ml">
+                        <div className="app__navtext">rearbuf</div>
                         <select 
-                            className="appchannellist__select" 
+                            className="channellist__select" 
                             size={4}
                             value={rear}
                             id={id}
@@ -159,10 +175,10 @@ const AppChannelItem = ({min, max, mark, id, assemble, rear, front, reaction}) =
                             {elementsBuf()}
                         </select>
                     </div>                  
-                    <div className="appchannellist__center">
-                        <div className="appchannellist__navtext">frontbuf</div>
+                    <div className="channellist__center">
+                        <div className="app__navtext">frontbuf</div>
                         <select 
-                            className="appchannellist__select" 
+                            className="channellist__select" 
                             size={4}
                             value={front}
                             id={id}
@@ -170,16 +186,16 @@ const AppChannelItem = ({min, max, mark, id, assemble, rear, front, reaction}) =
                             {elementsBuf()}
                         </select>
                     </div>
-                    <div className="appchannellist__center ml">
-                        <div className='appchannellist__navtext'>frontbuffer</div>
-                        <div className='appchannellist__bkg appchannellist__text'>{channels[id].front}</div>
-                        <div className='appchannellist__navtext'>rearbuffer</div>
-                        <div className='appchannellist__bkg appchannellist__text'>{channels[id].rear}</div>
+                    <div className="channellist__center ml">
+                        <div className='app__navtext'>frontbuffer</div>
+                        <div className='channellist__bkg channellist__text'>{channels[id].front}</div>
+                        <div className='app__navtext'>rearbuffer</div>
+                        <div className='channellist__bkg channellist__text'>{channels[id].rear}</div>
                     </div>
-                    <div className="appchannellist__center ml">
-                        <div className="appchannellist__navtext">reaction</div>
+                    <div className="channellist__center ml">
+                        <div className="app__navtext">reaction</div>
                         <select 
-                            className="appchannellist__select" 
+                            className="channellist__select" 
                             id={id}
                             value={reaction}
                             size={4}

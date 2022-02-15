@@ -1,17 +1,14 @@
 @import '../../style/variables.scss';
 
-.appvisualdisplaysheet {
-    padding: 1px 5px;
-    height: 200px;
+.visualdisplaysheet {
     width: 1044px;
     margin-bottom: 8px;
-    border: 0.5px solid #ffffff;
-    border-radius: 5px;
     &__center {
         text-align: center;
     }
     &__freq {
         font-family:  "Mini";
         font-size: 7px;
+        color:$textcolor;
     }
 }

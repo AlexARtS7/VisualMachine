@@ -1,56 +1,27 @@
 @import '../../style/variables.scss';
 
-.appchannellist {
-    padding: 1px 5px;
+.channellist {
     height: 110px;
     width: 1044px;
     margin-bottom: 8px;
-    border: 0.5px solid #ffffff;
-    border-radius: 5px;
-    &__line {
-        background-color: #ffffff;
-        height: 1px;
-        margin-top: 4px;
-    }
     &__center {
         text-align: center;
-    }
-    &__navtext {
-        font-family: "mini";
-        font-size: 8px;
-        margin: 2px 5px;
     }
     &__select {
         margin: 0px 2px;
-        // font-family: "mini";
         font-size: 10px;
         min-width: 20px;
-        background-color:black;
-        color: $textcolor;
-        padding: 0 16px;
-    }
-    &__item {
-        font-size: 10px;
-        background-color:black;
-        color: $textcolor;
-        cursor: pointer;
-        margin: 0 2px;
-        letter-spacing: 1px;
-    }
-    &__center {
-        text-align: center;
-    }
-    &__freq {
-        font-family:  "Mini";
-        font-size: 7px;
+        padding: 0 14px;
     }
     &__text {
         font-size: 14px;
+        user-select: none;
     }
     &__bkg {
-        background-color:black;
+        background-color: black;
         border: 0.5px solid #ffffff;
         border-radius: 5px;
+        color: $textcolor;
     }
     &__renderarea {
         width: 250px;
@@ -75,30 +46,36 @@
     height: 50px;
     background-color:#ffffff;
     border-radius: 2px;
+    z-index: 5;
 }
 
 .indicator {
-    height: 52px;
-    width: 3px;
+    height: 50px;
+    width: 0.5px;
     position: absolute;
     z-index: 100;
-    top: 1px;
+    top: 2px;
     background-color: #ffffff;
-    border: 1px solid black;
+    // border: 1px solid black;
 }
 
 .markers {
     height: 8px;
-    width: 3px;
+    width: 0.5px;
     position: absolute;    
     background-color: #ffffff;
-    border: 1px solid black;
     font-family: "mini";
     font-size: 8px;
 }
 .up {
-    top: 1px;
+    top: 0px;
 }
 .down {
-    bottom: 2px;
+    bottom: 0px;
+}
+
+.closebutton {
+    &:hover {
+        background-color:rgb(209, 22, 38);
+    }
 }
