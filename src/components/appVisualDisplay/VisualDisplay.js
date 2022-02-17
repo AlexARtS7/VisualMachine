@@ -2,14 +2,18 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { initState } from '../../services/appProcessor';
 
-import './appVisualDisplay.scss';
-// import store from '../../store';
+import './visualDisplay.scss';
 
-const AppVisualDisplay = () => { 
+const VisualDisplay = () => {
     const dispatch = useDispatch();
-    const {rate, fillStatus, renderColor, peaksStatus, channels} = useSelector(state => state)
 
-    const freq = () =>{
+    const rate = useSelector(state => state.rate)
+    const fillStatus = useSelector(state => state.fillStatus)
+    const renderColor = useSelector(state => state.renderColor)
+    const peaksStatus = useSelector(state => state.peaksStatus)
+    const channels = useSelector(state => state.channels)
+
+    const freq = () => {
         let cons
         const frequencyGenerated = (max, steep, dots, mdots) => {
             cons = mdots + ' 0 ';
@@ -64,7 +68,7 @@ const AppVisualDisplay = () => {
             <div className="app__title">VisualDisplay</div>
                 <div>
                     <select 
-                    value={rate}
+                    defaultValue={rate}
                     onChange={(e) => onChangeRate(e.target)}>
                         <option value="255">Mode: 255 samples</option>
                         <option value="204">Mode: 204 samples</option>
@@ -72,13 +76,13 @@ const AppVisualDisplay = () => {
                         {/* <option value="44">Mode: 45 samples</option> */}
                     </select>
                     <select 
-                    value={fillStatus}
+                    defaultValue={fillStatus}
                     onChange={(e) => dispatch({type: 'CHANGE_FILL_STATUS', fill: e.target.value})}>
                         <option value="1">Render: Fill</option>
                         <option value="0">Render: Stroke</option>
                     </select>
                     <select 
-                    value={renderColor}
+                    defaultValue={renderColor}
                     onChange={(e) => dispatch({type: 'CHANGE_COLOR', color: e.target.value})}> 
                         <option value="0,0,255">Color: Blue</option>
                         <option value="255,0,0">Color: Red</option>
@@ -94,7 +98,7 @@ const AppVisualDisplay = () => {
                         <option value="189, 183, 107">Color: DarkKhaki</option>
                     </select>
                     <select 
-                    value={peaksStatus}
+                    defaultValue={peaksStatus}
                     onChange={(e) => dispatch({type: 'CHANGE_PEAKS_STATUS', peaks: e.target.value})}>
                         <option value="1">Peaks: Yes</option>
                         <option value="0">Peaks: No</option>
@@ -109,4 +113,4 @@ const AppVisualDisplay = () => {
     )
 }
 
-export default AppVisualDisplay;
+export default VisualDisplay;

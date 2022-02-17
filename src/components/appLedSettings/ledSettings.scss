@@ -1,0 +1,31 @@
+@import '../../style/variables.scss';
+
+.ledsettings {
+    // width: 100%;
+    width: 432px;
+    height: 600px;
+    margin-bottom: 8px;
+    // position: relative;
+    &__sheet {
+        height: 100px;
+        margin-top: 8px;
+        padding: 5px;
+    }
+    &__item {
+        height: 80px;
+        width: 100%;
+        margin: 3px;
+    }
+    &__view {
+        height: 65px;
+        width: 100%;
+        // margin: 3px;
+    }
+}
+
+.sticky {
+    position: fixed;
+    top: 2px;
+    // z-index: 101;
+    // background-color: whitesmoke;
+  }

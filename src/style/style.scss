@@ -63,7 +63,7 @@ button {
 }
 
 .app {
-    width: 100%;
+    width: 100vw;
     // min-width: 1536px;
     min-height: 100vh;
     height: 100%;
@@ -88,7 +88,15 @@ button {
         //     justify-content: flex-end;
         // }
     }
-    
+    &__center {
+        text-align: center;
+    }
+    &__bkg {
+        background-color: black;
+        border: 0.5px solid #ffffff;
+        border-radius: 5px;
+        color: $textcolor;
+    }
     &__sheet {
         background-color: $sheetcolor;
         border-radius: 4px;

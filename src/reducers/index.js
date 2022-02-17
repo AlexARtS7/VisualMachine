@@ -85,8 +85,7 @@ const reducer = (state = initialState, action) => {
         }   
         case 'DELETE_SELECTED_CHANNEL':
             temp = state.channels;
-            temp.splice(action.id, 1);
-            // temp[action.id].reaction = +action.reaction            
+            temp.splice(action.id, 1);         
         return {
             ...state,
             channels: temp       

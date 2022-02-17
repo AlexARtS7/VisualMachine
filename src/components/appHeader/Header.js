@@ -1,6 +1,6 @@
-import './appHeader.scss';
+import './header.scss';
 
-const AppHeader = () => {
+const Header = () => {
     return (
       <div className="app__backsheet">
         <div className="app__sheet appheadersheet">
@@ -16,4 +16,4 @@ const AppHeader = () => {
     );
   }
   
-  export default AppHeader;
+  export default Header;

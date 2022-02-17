@@ -4,9 +4,6 @@
     height: 110px;
     width: 1044px;
     margin-bottom: 8px;
-    &__center {
-        text-align: center;
-    }
     &__select {
         margin: 0px 2px;
         font-size: 10px;
@@ -16,12 +13,6 @@
     &__text {
         font-size: 14px;
         user-select: none;
-    }
-    &__bkg {
-        background-color: black;
-        border: 0.5px solid #ffffff;
-        border-radius: 5px;
-        color: $textcolor;
     }
     &__renderarea {
         width: 250px;
