@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { initMarkers, canvasRender } from '../../services/appDisplayDrawingProcessor';
 import { initState } from '../../services/appProcessor';
+
+import Actions from '../../store/actions/actions';
 
 import './visualDisplay.scss';
 
 const VisualDisplay = () => {
-    const dispatch = useDispatch();
+    const {changeFillStatus, onChangeRate, changeColor, changePeaksStatus, addNewChannel} = Actions();
 
     const rate = useSelector(state => state.rate)
     const fillStatus = useSelector(state => state.fillStatus)
@@ -50,20 +53,28 @@ const VisualDisplay = () => {
         initState();
     })
 
-    const onChangeRate = (event) => {
-        dispatch({type: 'CHANGE_VISMODE', rate: event.value})
-        channels.forEach((item, i) => {
-            if(item.max > +event.value) {
-                dispatch({type: 'CHANGE_MAX_CHANNEL', max: event.value, id: i})
-            }
-            if(item.min > +event.value) {
-                dispatch({type: 'CHANGE_MIN_CHANNEL', min: event.value, id: i})
-            }
-        });
+    const addChannels = () => {
+        const abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+        let res = abc.find(i => !channels.map(item => item.mark).includes(i))
+        if(channels.length < 10){
+            const tempArr = channels;
+            tempArr.push (
+                {mark: res, min: 0, max: 0, 
+                color: '0,255,0', 
+                assemble: 'maximum', rear: 28, 
+                front: 10, reaction: 2})
+         
+        tempArr.sort((a, b) => {
+            if(a.mark < b.mark) return -1;
+            if(a.mark > b.mark) return 1;
+            })
+            addNewChannel(tempArr);
+            initMarkers();
+        }
     }
 
     return (
-        <div className="app__sheet visualdisplaysheet">
+        <div id='visualDisplay' className="app__sheet visualdisplaysheet">
             <div className='app__flex__between'>
             <div className="app__title">VisualDisplay</div>
                 <div>
@@ -77,13 +88,13 @@ const VisualDisplay = () => {
                     </select>
                     <select 
                     defaultValue={fillStatus}
-                    onChange={(e) => dispatch({type: 'CHANGE_FILL_STATUS', fill: e.target.value})}>
+                    onChange={(e) => changeFillStatus(e.target)}>
                         <option value="1">Render: Fill</option>
                         <option value="0">Render: Stroke</option>
                     </select>
                     <select 
                     defaultValue={renderColor}
-                    onChange={(e) => dispatch({type: 'CHANGE_COLOR', color: e.target.value})}> 
+                    onChange={(e) => changeColor(e.target)}> 
                         <option value="0,0,255">Color: Blue</option>
                         <option value="255,0,0">Color: Red</option>
                         <option value="0,255,0">Color: Green</option>
@@ -99,7 +110,7 @@ const VisualDisplay = () => {
                     </select>
                     <select 
                     defaultValue={peaksStatus}
-                    onChange={(e) => dispatch({type: 'CHANGE_PEAKS_STATUS', peaks: e.target.value})}>
+                    onChange={(e) => changePeaksStatus(e.target)}>
                         <option value="1">Peaks: Yes</option>
                         <option value="0">Peaks: No</option>
                     </select>
@@ -108,7 +119,12 @@ const VisualDisplay = () => {
             <canvas id='canvasDisplay'></canvas>
             <div className="visualdisplaysheet__center">
                 <div className="visualdisplaysheet__freq">{freq()}</div>
-            </div>            
+            </div> 
+            <div className='app__line'></div>  
+            <div>
+                <span className="app__title">Controls:</span>
+                <button onClick={addChannels}>ADDNEWCHANNEL</button>
+            </div>         
         </div>
     )
 }

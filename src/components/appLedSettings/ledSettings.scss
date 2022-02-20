@@ -3,13 +3,39 @@
 .ledsettings {
     // width: 100%;
     width: 432px;
-    height: 600px;
+    height: 583px;  // 600
     margin-bottom: 8px;
     // position: relative;
+    &__button {
+        width: 100%;
+        height: 40px;
+    }
     &__sheet {
         height: 100px;
         margin-top: 8px;
         padding: 5px;
+    }
+    &__select {
+        margin: 10px 2px;
+        font-size: 10px;
+        width: 130px;
+        padding: 0 14px;
+    }
+    &__selectS {
+        margin: 10px 2px;
+        font-size: 10px;
+        width: 100%;
+        padding: 0 14px;
+    }
+    &__checkbox {
+        margin: 10px;
+        cursor: pointer;
+        // margin-left: 50px;
+    }
+    &__text {
+        font-size: 14px;
+        user-select: none;
+        color: $textcolor;
     }
     &__item {
         height: 80px;
@@ -23,9 +49,3 @@
     }
 }
 
-.sticky {
-    position: fixed;
-    top: 2px;
-    // z-index: 101;
-    // background-color: whitesmoke;
-  }

@@ -1,8 +1,16 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { initMarkers } from '../../services/appDisplayDrawingProcessor';
+import { useSelector } from 'react-redux'
+import Actions from '../../store/actions/actions';
 
 const ChannelItem = ({id}) => {
-    const dispatch = useDispatch();
+    const { changeSampleColor, 
+            assembleChange, 
+            rearChange, 
+            frontChange, 
+            reactionChange,
+            deleteChannel,
+            changeMinChannel,
+            changeMaxChannel} = Actions();
+
     const rate = useSelector(state => state.rate)
     const {channels} = useSelector(state => state)   
     
@@ -14,69 +22,12 @@ const ChannelItem = ({id}) => {
     const dfId = `df${id}`;
     const drId = `dr${id}`;
     
-    const elements = () => {
+    const elements = (max) => {
         const arr = []
-        for (let i = 0; i <= rate ; i ++){
+        for (let i = 0; i <= max ; i ++){
             arr.push(<option key={i} value={i}>{i}</option>)  
         } return arr               
     }   
-    
-    const elementsBuf = () => {
-        const arr = []
-        for (let i = 0; i <= 50 ; i ++){
-            arr.push(<option key={i} value={i}>{i}</option>)  
-        } return arr               
-    } 
-
-    const calibreMinMax = (event) => {
-        dispatch({type: 'CHANGE_MAX_CHANNEL', max: event.value, id: event.id})
-        dispatch({type: 'CHANGE_MIN_CHANNEL', min: event.value, id: event.id})
-    }
-
-    const changeMin = (event) => {
-        if(event.value > channels[event.id].max){
-            calibreMinMax(event);
-        } else {
-            dispatch({type: 'CHANGE_MIN_CHANNEL', min: event.value, id: event.id})
-        } 
-        initMarkers();  
-    }
-
-    const changeMax = (event) => {
-        if(event.value < channels[event.id].min){
-            calibreMinMax(event);
-        } else {
-            dispatch({type: 'CHANGE_MAX_CHANNEL', max: event.value, id: event.id})
-        }  
-        initMarkers();    
-    }
-
-    const changeSampleColor = (event) => {
-        dispatch({type: 'CHANGE_SAMPLE_COLOR', color: event.value, id: event.id})
-        initMarkers();
-    }
-
-    const assembleChange = (event) => {
-        dispatch({type: 'CHANGE_SAMPLE_ASSEMBLE', assemble: event.value, id: event.id})
-        
-    }
-
-    const rearChange = (event) => {
-        dispatch({type: 'CHANGE_REARBUFFER', rear: event.value, id: event.id})
-    }
-
-    const frontChange = (event) => {
-        dispatch({type: 'CHANGE_FRONTBUFFER', front: event.value, id: event.id})
-    }
-
-    const reactionChange = (event) => {
-        dispatch({type: 'CHANGE_REACTION', reaction: event.value, id: event.id})
-    }
-
-    const deleteChannel = (event) => {
-        dispatch({type: 'DELETE_SELECTED_CHANNEL', id: event.id})
-        initMarkers();
-    }
 
     return (
         <div className="app__sheet channellist">
@@ -100,7 +51,7 @@ const ChannelItem = ({id}) => {
                         <option value="154, 205, 50">Color: YellowGreen</option>
                         <option value="189, 183, 107">Color: DarkKhaki</option>
                 </select>
-                {id > 2 ? <button 
+                {id > 0 ? <button 
                         className='closebutton' 
                         id={id}
                         onClick={(e) => deleteChannel(e.target)}
@@ -117,8 +68,8 @@ const ChannelItem = ({id}) => {
                         size={4}
                         value={channels[id].min}
                         id={id}
-                        onChange={(e) => changeMin(e.target)}>
-                        {elements()}
+                        onChange={(e) => changeMinChannel(e.target, id)}>
+                        {elements(rate)}
                     </select>
                 </div>
                 <div className="app__center">
@@ -128,8 +79,8 @@ const ChannelItem = ({id}) => {
                         size={4}
                         value={channels[id].max}
                         id={id}
-                        onChange={(e) => changeMax(e.target)}>
-                        {elements()}
+                        onChange={(e) => changeMaxChannel(e.target, id)}>
+                        {elements(rate)}
                     </select>
                 </div>
                 <div className="app__center ml">
@@ -146,8 +97,8 @@ const ChannelItem = ({id}) => {
                         size={4}
                         value={channels[id].assemble}
                         onChange={(e) => assembleChange(e.target)}> 
-                            <option value="average">average of a samples</option>
-                            <option value="maximum">maximum of a samples</option>
+                            <option value="average">Average of a samples</option>
+                            <option value="maximum">Maximum of a samples</option>
                     </select>
                 </div>
                 <div className="app__center ml">
@@ -173,7 +124,7 @@ const ChannelItem = ({id}) => {
                             value={channels[id].rear}
                             id={id}
                             onChange={(e) => rearChange(e.target)}>
-                            {elementsBuf()}
+                            {elements(50)}
                         </select>
                     </div>                  
                     <div className="app__center">
@@ -184,7 +135,7 @@ const ChannelItem = ({id}) => {
                             value={channels[id].front}
                             id={id}
                             onChange={(e) => frontChange(e.target)}>
-                            {elementsBuf()}
+                            {elements(50)}
                         </select>
                     </div>
                     <div className="app__center ml">

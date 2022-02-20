@@ -1,4 +1,4 @@
-import store from '../../src/store';
+import store from '../../src/store/store';
 
 var ctx;
 let peaksX = [],
@@ -62,7 +62,7 @@ const canvasDraw = (data, visMode, fillStatus, renderColor, peaksStatus) => {
                 ctx.strokeStyle = `rgba( ${renderColor}, ${0.02 * vrbData} )`
                 ctx.strokeRect(marginLeft+margin*i*2, 151.5, width, -vrbData);
             }
-            
+
             if(peaksStatus){
             // Пики
             if(peaksX[i] < vrbData){

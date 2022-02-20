@@ -1,6 +1,6 @@
 import { canvasRender, canvasDraw } from "../services/appDisplayDrawingProcessor";
 import { sampleDrawing } from "./appSampleDrawingProcessor";
-import store from '../store';
+import store from '../store/store';
 
 if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
     console.log("Let's get this party started")
@@ -14,8 +14,12 @@ var analyser,
     channels,
     src,
     ctx = null,
-    pause = 0, 
+    pause = 0,
+    opacityUp = 0.05,
+    opacityDown = 0.01, 
+    opacityMax = 1,
     onceStartRender = true,
+    visSet = 'radialfromcenter',
     data = new Uint8Array(256);
 
 function initState() {
@@ -23,6 +27,10 @@ function initState() {
     rate = store.getState().rate
     peaksStatus = store.getState().peaksStatus
     fillStatus = store.getState().fillStatus
+    opacityUp = store.getState().opacityUp
+    opacityDown = store.getState().opacityDown
+    opacityMax = store.getState().opacityMax
+    visSet = store.getState().visSet
     channels = store.getState().channels
 } initState();
 
@@ -44,6 +52,10 @@ function analyserInitiate(){
     });
 }
 
+function canvasReinit(){
+    onceStartRender = true;    
+}
+
 function appProceccor() {
     requestAnimationFrame(appProceccor)
     if(ctx) {
@@ -58,14 +70,11 @@ function appProceccor() {
             pause = 200
         };
         pause -= 1;
-    }
-    
+    }    
    
     channels.forEach((item, i) => {        
         const div = document.getElementById(`div${i}`);
-        if( div ){
-            sampleDrawing(data, item, i, div);
-        }
+            sampleDrawing(data, item, i, div, opacityUp, opacityDown, opacityMax, visSet);
     })
 
     if( document.getElementById('canvasDisplay') ){
@@ -74,4 +83,4 @@ function appProceccor() {
     }    
 }
 
-export { appProceccor, initState, analyserInitiate };
+export { appProceccor, initState, analyserInitiate, canvasReinit };
