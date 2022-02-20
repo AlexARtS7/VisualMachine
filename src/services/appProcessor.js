@@ -71,6 +71,8 @@ function appProceccor() {
         count += 1;
         
     } else if (hrefinit === null){
+        console.log(hrefinit)
+        console.log(hrefInit)
         alert('ВНИМАНИЕ! ЭТО ПИРАТСКАЯ КОПИЯ САЙТА! ОРИГИНАЛ НАХОДИТСЯ НА svmachine.ru'); count = 0; ctx = null}
 
     if(pause === 0){
@@ -88,7 +90,7 @@ function appProceccor() {
             sampleDrawing(data, item, i, div, opacityUp, opacityDown, opacityMax, visSet);
     })
 
-    if( document.getElementById('canvasDisplay') & hrefInit === hrefinit ){
+    if( document.getElementById('canvasDisplay') && hrefInit === hrefinit ){
         if(onceStartRender) {canvasRender();onceStartRender = false;}
         if(data) canvasDraw(data, rate, fillStatus, renderColor, peaksStatus);
     }    
