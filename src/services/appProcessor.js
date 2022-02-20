@@ -67,13 +67,11 @@ function appProceccor() {
         analyser.getByteFrequencyData(data);
     }
     
-    if(count < 100){
+    if(count < 10000){
         count += 1;
         
     } else if (hrefinit === null){
-        console.log(hrefinit)
-        console.log(hrefInit)
-        alert('ВНИМАНИЕ! ЭТО ПИРАТСКАЯ КОПИЯ САЙТА! ОРИГИНАЛ НАХОДИТСЯ НА svmachine.ru'); count = 0; ctx = null}
+        alert('ВНИМАНИЕ! Адрес сайта не корректен! Перейдите на svmachine.ru для продолжения работы.'); count = 0; ctx = null}
 
     if(pause === 0){
         analyserInitiate();
