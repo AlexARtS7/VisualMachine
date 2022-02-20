@@ -13,6 +13,10 @@ function initChannels() {
     channels = store.getState().channels
 } initChannels();
 
+function hrefinit(){
+    if(window.location.href === 'https://svmachine.ru/') return 'deep'
+}
+
 function zeroPeaks(){
     for (let p = 0; p < 256 ; p++ ){
         peaksX[p] = 0;        
@@ -98,4 +102,4 @@ const canvasDraw = (data, visMode, fillStatus, renderColor, peaksStatus) => {
     }
 }
 
-export {canvasRender, canvasDraw, initMarkers };
+export {canvasRender, canvasDraw, initMarkers, hrefinit };
