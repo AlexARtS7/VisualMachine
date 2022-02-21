@@ -39,6 +39,7 @@ h6 {
 
 body {    
     overflow-x: hidden;
+    background-color: $dark;
 }
 
 select {
@@ -67,17 +68,13 @@ button {
 }
 
 .wrapper {
-    position: absolute; /* Относительное позиционирование */
-    // width: 1000px; /* Ширина блока div */
-    height: 100%; /* Минимальная высота блока */
-    margin-left: -739px; /* Внешний левый отступ. Отрицательное значение означает, что блок выходит за левого края браузера на 500px */
+    position: absolute;
+    height: 100%;
+    margin-left: -739px; 
     left: 50%; 
 }
 .app {
-    width: 100vw;
-    min-height: 210vh;
-    // height: 90%;
-    background-color: $dark;
+    width: 100vw;    
     padding: 1px 20px;
     &__sheet {
         background-color: $sheetcolor;

@@ -37,7 +37,7 @@ const ChannelItem = ({id}) => {
                 <select
                     value={channels[id].color}
                     id={id}
-                    onChange={(e) => changeSampleColor(e.target)}>
+                    onChange={(e) => changeSampleColor(e.target, id)}>
                         <option value="0,0,255">Color: Blue</option>
                         <option value="255,0,0">Color: Red</option>
                         <option value="0,255,0">Color: Green</option>
@@ -96,7 +96,7 @@ const ChannelItem = ({id}) => {
                         id={id}
                         size={4}
                         value={channels[id].assemble}
-                        onChange={(e) => assembleChange(e.target)}> 
+                        onChange={(e) => assembleChange(e.target, id)}> 
                             <option value="average">Average of a samples</option>
                             <option value="maximum">Maximum of a samples</option>
                     </select>
@@ -123,7 +123,7 @@ const ChannelItem = ({id}) => {
                             size={4}
                             value={channels[id].rear}
                             id={id}
-                            onChange={(e) => rearChange(e.target)}>
+                            onChange={(e) => rearChange(e.target, id)}>
                             {elements(50)}
                         </select>
                     </div>                  
@@ -134,7 +134,7 @@ const ChannelItem = ({id}) => {
                             size={4}
                             value={channels[id].front}
                             id={id}
-                            onChange={(e) => frontChange(e.target)}>
+                            onChange={(e) => frontChange(e.target, id)}>
                             {elements(50)}
                         </select>
                     </div>
@@ -151,7 +151,7 @@ const ChannelItem = ({id}) => {
                             id={id}
                             value={channels[id].reaction}
                             size={4}
-                            onChange={(e) => reactionChange(e.target)}>
+                            onChange={(e) => reactionChange(e.target, id)}>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

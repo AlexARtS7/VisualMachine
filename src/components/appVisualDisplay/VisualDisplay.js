@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { initMarkers, canvasRender } from '../../services/appDisplayDrawingProcessor';
 import { initState } from '../../services/appProcessor';
 
 import Actions from '../../store/actions/actions';
@@ -8,13 +7,12 @@ import Actions from '../../store/actions/actions';
 import './visualDisplay.scss';
 
 const VisualDisplay = () => {
-    const {changeFillStatus, onChangeRate, changeColor, changePeaksStatus, addNewChannel} = Actions();
+    const {changeFillStatus, onChangeRate, changeColor, changePeaksStatus, addChannels} = Actions();
 
     const rate = useSelector(state => state.rate)
     const fillStatus = useSelector(state => state.fillStatus)
     const renderColor = useSelector(state => state.renderColor)
     const peaksStatus = useSelector(state => state.peaksStatus)
-    const channels = useSelector(state => state.channels)
 
     const freq = () => {
         let cons
@@ -51,27 +49,7 @@ const VisualDisplay = () => {
 
     useEffect(()=>{
         initState();
-    })
-
-    const addChannels = () => {
-        const abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-        let res = abc.find(i => !channels.map(item => item.mark).includes(i))
-        if(channels.length < 10){
-            const tempArr = channels;
-            tempArr.push (
-                {mark: res, min: 0, max: 0, 
-                color: '0,255,0', 
-                assemble: 'maximum', rear: 28, 
-                front: 10, reaction: 2})
-         
-        tempArr.sort((a, b) => {
-            if(a.mark < b.mark) return -1;
-            if(a.mark > b.mark) return 1;
-            })
-            addNewChannel(tempArr);
-            initMarkers();
-        }
-    }
+    })   
 
     return (
         <div id='visualDisplay' className="app__sheet visualdisplaysheet">

@@ -2,10 +2,6 @@ import { canvasRender, canvasDraw } from "../services/appDisplayDrawingProcessor
 import { sampleDrawing } from "./appSampleDrawingProcessor";
 import store from '../store/store';
 
-if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
-    console.log("Let's get this party started")
-  }
-
 var analyser,
     renderColor,
     rate,
@@ -62,11 +58,11 @@ function canvasReinit(){
 
 function appProceccor() {
     requestAnimationFrame(appProceccor)
-    if(ctx) {
+    if(ctx && hrefInit === initHref) {
         analyser.getByteFrequencyData(data);
     }
 
-    if(pause === 0){
+    if(pause === 0 && hrefInit === initHref){
         analyserInitiate();
         pause = 30;
     } else if(pause < 100) {
@@ -74,16 +70,16 @@ function appProceccor() {
             pause = 200
         };
         pause -= 1;
-    }    
-   
+    }       
+
     channels.forEach((item, i) => {        
         const div = document.getElementById(`div${i}`);
             sampleDrawing(data, item, i, div, opacityUp, opacityDown, opacityMax, visSet);
     })
    
-    if( document.getElementById('canvasDisplay' && hrefInit === initHref)){
+    if( document.getElementById('canvasDisplay')  && hrefInit === initHref ){
         if(onceStartRender) {canvasRender();onceStartRender = false;}
-        if(data) canvasDraw(data, rate, fillStatus, renderColor, peaksStatus);
+        if(data) canvasDraw(data, rate, fillStatus, renderColor, peaksStatus, hrefInit, initHref);
     }    
 }
 

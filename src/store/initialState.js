@@ -1,4 +1,3 @@
-
 const getItem = (item) => {
     return localStorage.getItem(item)
 }
@@ -25,5 +24,5 @@ const initialState = {
         
     fullScreen: 0
 }
-
+// hrefInit: 'http://localhost:3000/'
 export default initialState;

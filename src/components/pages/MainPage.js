@@ -8,7 +8,8 @@ const MainPage = () => {
     //sheet fixed
     window.addEventListener('scroll', function(ev) {
         const back = document.getElementById('Header');
-        const compensating = document.getElementById('compensating');
+        if(back){
+            const compensating = document.getElementById('compensating');
         const targetA = document.getElementById('ledsheet');
         const targetB = document.getElementById('visualDisplay');
         const pos = Math.floor(back.getBoundingClientRect().top);
@@ -24,6 +25,7 @@ const MainPage = () => {
             compensating.style.height = '0'
             compensating.style.width = '0'
             }
+        }        
     });
 
     return (

@@ -9,8 +9,11 @@ const FullScreen = () => {
     const {channels} = useSelector(state => state) 
     const visLab = useSelector(state => state.visLab)
     const visBor = useSelector(state => state.visBor)
+    const hrefInit = useSelector(state => state.hrefInit)
+    const initHref = useSelector(state => state.initHref)
 
     const elements = channels.map((item, i) => {
+        if(hrefInit === !initHref) return null;
         const viewId = `view${i}`
         return (
             <div key={i} className='fullscreen__item'>

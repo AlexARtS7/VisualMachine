@@ -1,107 +1,126 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { initMarkers } from '../../services/appDisplayDrawingProcessor';
 import { initState } from "../../services/appProcessor";
+import { hrefInition } from "../../services/appDisplayDrawingProcessor";
 
 const Actions = () => {
     const dispatch = useDispatch();
     const channels = useSelector(state => state.channels)
+    const fullScreen = useSelector(state => state.fullScreen)
+    const hrefInit = useSelector(state => state.hrefInit)
 
-    const changeFillStatus = (e) => {
+    const changeFillStatus = (e) => {        
+        localStorage.setItem('fillStatus', e.value)
         dispatch({type: 'CHANGE_FILL_STATUS', fill: e.value});
     }
 
-    const calibreMinMax = (e, i) => {
-        dispatch({type: 'CHANGE_MAX_CHANNEL', max: e.value, id: i})
-        dispatch({type: 'CHANGE_MIN_CHANNEL', min: e.value, id: i})
-    }
-
     const changeMaxChannel = (e, i) => {
-        dispatch({type: 'CHANGE_MAX_CHANNEL', max: e.value, id: i})
+        const tempArr = channels;
+        tempArr[i].max = +e.value
+
+        dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })
+
         if(e.value < channels[i].min){
-            calibreMinMax(e, i);
-        } else {
-            dispatch({type: 'CHANGE_MAX_CHANNEL', max: e.value, id: i})
-        }  
+            changeMinChannel(e, i);
+        }
         initMarkers(); 
     }
 
-    const changeMinChannel = (e, i) => {        
+    const changeMinChannel = (e, i) => {         
+        const tempArr = channels;
+        tempArr[i].min = +e.value
+
+        dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })
+
         if(e.value > channels[i].max){
-            calibreMinMax(e, i);
-        } else {
-            dispatch({type: 'CHANGE_MIN_CHANNEL', min: e.value, id: i})
-        } 
+            changeMaxChannel(e, i);
+        }
         initMarkers();
     }
 
-    const changeVisMode = (e) => {
+    const changeVisMode = (e) => {        
+        localStorage.setItem('rate', e.value)
         dispatch({type: 'CHANGE_VISMODE', rate: e.value})
     }
 
-    const changeColor = (e) => {
+    const changeColor = (e) => {        
+        localStorage.setItem('renderColor', e.value)
         dispatch({type: 'CHANGE_COLOR', color: e.value})
     }
 
-    const changePeaksStatus = (e) => {
+    const changePeaksStatus = (e) => {        
+        localStorage.setItem('peaksStatus', e.value)
         dispatch({type: 'CHANGE_PEAKS_STATUS', peaks: e.value})
     }
 
-    const addNewChannel = (eArr) => {
-        dispatch({type: 'ADD_NEW_CHANNEL', newArr: eArr})
-    }
+    const changeSampleColor = (e, i) => {
+        const tempArr = channels;
+        tempArr[i].color = e.value
 
-    const changeSampleColor = (e) => {
-        dispatch({type: 'CHANGE_SAMPLE_COLOR', color: e.value, id: e.id})
+        dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })
         initMarkers();
     }
 
-    const assembleChange = (e) => {
-        dispatch({type: 'CHANGE_SAMPLE_ASSEMBLE', assemble: e.value, id: e.id})
-        
+    const assembleChange = (e, i) => {
+        const tempArr = channels;
+        tempArr[i].assemble = e.value
+
+        dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })        
     }
 
-    const rearChange = (e) => {
-        dispatch({type: 'CHANGE_REARBUFFER', rear: e.value, id: e.id})
+    const rearChange = (e, i) => {
+        const tempArr = channels;
+        tempArr[i].rear = +e.value
+
+        dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })
     }
 
-    const frontChange = (e) => {
-        dispatch({type: 'CHANGE_FRONTBUFFER', front: e.value, id: e.id})
+    const frontChange = (e, i) => {
+        const tempArr = channels;
+        tempArr[i].front = +e.value
+
+        dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })
     }
 
-    const reactionChange = (e) => {
-        dispatch({type: 'CHANGE_REACTION', reaction: e.value, id: e.id})
+    const reactionChange = (e, i) => {
+        const tempArr = channels;
+        tempArr[i].reaction = +e.value
+
+        dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })
     }
 
-    const deleteChannel = (e) => {
-        dispatch({type: 'DELETE_SELECTED_CHANNEL', id: e.id})
-        initMarkers();
-    }
-
-    const changeLightUp = (e) => {
+    const changeLightUp = (e) => {        
+        localStorage.setItem('opacityUp', e.value/1000)
         dispatch({type: 'CHANGE_LIGHT_UP', value: e.value})
         initState();
     }
 
-    const changeLightDown = (e) => {
+    const changeLightDown = (e) => {        
+        localStorage.setItem('opacityDown', e.value/1000)
         dispatch({type: 'CHANGE_LIGHT_DOWN', value: e.value})
         initState();
     }
 
-    const changeLightMax = (e) => {
+    const changeLightMax = (e) => {        
+        localStorage.setItem('opacityMax', e.value/100)
         dispatch({type: 'CHANGE_LIGHT_MAX', value: e.value})
         initState();
     }
 
-    const changeVis = (e) => {
+    const changeVis = (e) => {        
+        localStorage.setItem('visSet', e.value)
         dispatch({type: 'CHANGE_VISUAL_SETTINGS', value: e.value})
         initState();
     }
 
-    const visBorChange = (e) => {
+    const visBorChange = (e) => {        
+        localStorage.setItem('visBor', e.checked)
         dispatch({type: 'CHANGE_BORDER_STATUS', value: e.checked})
     }
 
-    const visLabChange = (e) => {        
+    const visLabChange = (e) => {   
+        localStorage.setItem('visLab', e.checked)     
         dispatch({type: 'CHANGE_LABELS_STATUS', value: e.checked})
     }
 
@@ -121,14 +140,47 @@ const Actions = () => {
         });
     }
 
+    const addChannels = () => {
+        const abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+        let res = abc.find(i => !channels.map(item => item.mark).includes(i))
+        if(channels.length < 10){
+            const tempArr = channels;
+            tempArr.push (
+                {mark: res, min: 0, max: 0, 
+                color: '0,255,0', 
+                assemble: 'maximum', rear: 28, 
+                front: 10, reaction: 2})
+         
+        tempArr.sort((a, b) => {
+            if(a.mark < b.mark) return -1;
+            if(a.mark > b.mark) return 1;
+            })
+
+            dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })
+            initMarkers();
+        }
+    }
+    
+    const deleteChannel = (i) => {
+        const tempArr = channels;
+        tempArr.splice(i, 1);   
+
+        dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })
+        initMarkers();
+    }
+
+    useEffect(() => {
+        dispatch({type: 'CHANGE_HREFINIT', hrefInit: hrefInition(), initHref: window.location.href })
+    }, [fullScreen])
+    
     //localstorage
     localStorage.setItem('channels', JSON.stringify(channels))
 
     return {changeFillStatus, 
+            addChannels,
             onChangeRate, 
             changeColor, 
             changePeaksStatus, 
-            addNewChannel, 
             changeSampleColor,
             assembleChange,
             rearChange,
