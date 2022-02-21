@@ -17,10 +17,6 @@ function initChannels() {
     channels = store.getState().channels
 } initChannels();
 
-function hrefinit(){
-    if(window.location.href === git) return 'deep'
-}
-
 function zeroPeaks(){
     for (let p = 0; p < 256 ; p++ ){
         peaksX[p] = 0;        
@@ -58,12 +54,12 @@ const canvasDraw = (data, visMode, fillStatus, renderColor, peaksStatus) => {
             let vrbData = data[i]/1.8;
             if(vrbData > 140) vrbData = 140;
 
-            if(markers[i] && git){
+            if(markers[i]){
                 ctx.fillStyle = `rgba( ${markers[i]}, ${0.005 * vrbData} )`
                 ctx.fillRect(marginLeft+margin*i*2, 151.5, width, -144);
             }
 
-            if (fillStatus && git){
+            if (fillStatus){
                 ctx.fillStyle = `rgba( ${renderColor}, ${0.02 * vrbData} )`
                 ctx.fillRect(marginLeft+margin*i*2, 151.5, width, -vrbData);
             } else {
@@ -106,4 +102,4 @@ const canvasDraw = (data, visMode, fillStatus, renderColor, peaksStatus) => {
     }
 }
 
-export {canvasRender, canvasDraw, initMarkers, hrefinit, gitSetting };
+export {canvasRender, canvasDraw, initMarkers, gitSetting };

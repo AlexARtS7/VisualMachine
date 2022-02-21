@@ -8,19 +8,18 @@ if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
 
 var analyser,
     renderColor,
-    hrefInit,
-    hrefinit,
     rate,
     peaksStatus,
     fillStatus,
     channels,
     src,
     ctx = null,
-    count = 0,
     pause = 0,
     opacityUp = 0.05,
     opacityDown = 0.01, 
     opacityMax = 1,
+    hrefInit,
+    initHref,
     onceStartRender = true,
     visSet = 'radialfromcenter',
     data = new Uint8Array(256);
@@ -31,10 +30,10 @@ function initState() {
     peaksStatus = store.getState().peaksStatus
     fillStatus = store.getState().fillStatus
     opacityUp = store.getState().opacityUp
-    hrefInit = store.getState().hrefInit
-    hrefinit = store.getState().hrefinit
     opacityDown = store.getState().opacityDown
     opacityMax = store.getState().opacityMax
+    hrefInit = store.getState().hrefInit
+    initHref = store.getState().initHref
     visSet = store.getState().visSet
     channels = store.getState().channels
 } initState();
@@ -66,12 +65,6 @@ function appProceccor() {
     if(ctx) {
         analyser.getByteFrequencyData(data);
     }
-    
-    if(count < 10000){
-        count += 1;
-        
-    } else if (hrefinit === null){
-        alert('ВНИМАНИЕ! Адрес сайта не корректен! Перейдите на svmachine.ru для продолжения работы.'); count = 0; ctx = null}
 
     if(pause === 0){
         analyserInitiate();
@@ -87,8 +80,8 @@ function appProceccor() {
         const div = document.getElementById(`div${i}`);
             sampleDrawing(data, item, i, div, opacityUp, opacityDown, opacityMax, visSet);
     })
-
-    if( document.getElementById('canvasDisplay') && hrefInit === hrefinit ){
+   
+    if( document.getElementById('canvasDisplay' && hrefInit === initHref)){
         if(onceStartRender) {canvasRender();onceStartRender = false;}
         if(data) canvasDraw(data, rate, fillStatus, renderColor, peaksStatus);
     }    
