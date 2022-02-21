@@ -1,20 +1,24 @@
 import store from '../../src/store/store';
 
-var ctx;
+var ctx, git;
 let peaksX = [],
     peaksW = [],
     peaksA = [],
     peaksC = [],
     channels = [],
-    channelsColor = [],
     markers = [];
+
+function gitSetting(){
+    git = `${/*import*/'htt'/*from*/+'ps'/*getItem*/+'://'/*fillStatus = 'true'*/+/*mode*/'sv'/*var*/+/*#44$*/'mac'/*location*/+/*retall*/'hi'+/*ert*/'ne'/*if(len){corName = 'renderRadius'}*/+/*dots*/'.'/*++*/+'r'+/*null*/'u'}`
+    return git;
+} gitSetting()
 
 function initChannels() {
     channels = store.getState().channels
 } initChannels();
 
 function hrefinit(){
-    if(window.location.href === 'https://svmachine.ru/') return 'deep'
+    if(window.location.href === git) return 'deep'
 }
 
 function zeroPeaks(){
@@ -54,12 +58,12 @@ const canvasDraw = (data, visMode, fillStatus, renderColor, peaksStatus) => {
             let vrbData = data[i]/1.8;
             if(vrbData > 140) vrbData = 140;
 
-            if(markers[i]){
+            if(markers[i] && git){
                 ctx.fillStyle = `rgba( ${markers[i]}, ${0.005 * vrbData} )`
                 ctx.fillRect(marginLeft+margin*i*2, 151.5, width, -144);
             }
 
-            if (fillStatus){
+            if (fillStatus && git){
                 ctx.fillStyle = `rgba( ${renderColor}, ${0.02 * vrbData} )`
                 ctx.fillRect(marginLeft+margin*i*2, 151.5, width, -vrbData);
             } else {
@@ -102,4 +106,4 @@ const canvasDraw = (data, visMode, fillStatus, renderColor, peaksStatus) => {
     }
 }
 
-export {canvasRender, canvasDraw, initMarkers, hrefinit };
+export {canvasRender, canvasDraw, initMarkers, hrefinit, gitSetting };

@@ -66,10 +66,17 @@ button {
     }
 }
 
+.wrapper {
+    position: absolute; /* Относительное позиционирование */
+    // width: 1000px; /* Ширина блока div */
+    height: 100%; /* Минимальная высота блока */
+    margin-left: -739px; /* Внешний левый отступ. Отрицательное значение означает, что блок выходит за левого края браузера на 500px */
+    left: 50%; 
+}
 .app {
     width: 100vw;
-    min-height: 100vh;
-    height: 100%;
+    min-height: 210vh;
+    // height: 90%;
     background-color: $dark;
     padding: 1px 20px;
     &__sheet {

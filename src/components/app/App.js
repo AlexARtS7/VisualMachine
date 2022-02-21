@@ -12,7 +12,7 @@ const App = () => {
 
   return (
     <div className="app">
-        <main>
+        <main className={fullScreen === 0 ? 'wrapper': null}>
             <Suspense fallback="Loading...">
               {fullScreen === 0 ? <MainPage/> : <FSPage/>}              
             </Suspense>                   

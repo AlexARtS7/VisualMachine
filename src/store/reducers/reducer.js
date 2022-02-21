@@ -63,6 +63,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 fillStatus: +action.fill
             }
+        case 'HREF_SET':
+        return {
+            ...state,
+            hrefInit: action.value
+        }
         case 'CHANGE_VISMODE':
             localStorage.setItem('rate', action.rate)
             return {

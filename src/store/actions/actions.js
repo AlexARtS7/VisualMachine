@@ -109,6 +109,10 @@ const Actions = () => {
         dispatch({type: 'CHANGE_FULLSCREEN_MODE', value: value})
     }
 
+    const hrefSet = (value) => {
+        dispatch({type: 'HREF_SET', value: value})
+    }
+
     const onChangeRate = (e) => {
         changeVisMode(e)
         channels.forEach((item, i) => {
@@ -140,6 +144,7 @@ const Actions = () => {
             changeLightUp,
             changeLightDown,
             changeVis,
+            hrefSet,
             visBorChange,
             visLabChange,
             changeLightMax,
