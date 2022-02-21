@@ -73,7 +73,7 @@ const ChannelItem = ({id}) => {
                     </select>
                 </div>
                 <div className="app__center">
-                    <div className="app__navtext">End</div>
+                    <div className="app__navtext">end</div>
                     <select 
                         className="channellist__select" 
                         size={4}

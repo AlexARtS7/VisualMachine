@@ -47,8 +47,10 @@ function analyserInitiate(){
         appProceccor();
     }).catch(error => {    
         alert(error + '\r\n\ Отклонено.');
-        analyserInitiate();
-        console.log('ok')
+        
+        setTimeout(() => {
+            analyserInitiate();
+        }, 2000)        
     });
 }
 

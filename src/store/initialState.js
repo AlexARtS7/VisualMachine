@@ -15,7 +15,7 @@ const initialState = {
     visSet: getItem('visSet') === null ? 'radialfromcenter' : getItem('visSet'),
     visBor: localStorage.getItem('visBor')  === 'false' ? false : true,
     visLab: localStorage.getItem('visLab')  === 'false' ? false : true,
-
+    
     channels: JSON.parse(getItem("channels")) === null ? [ 
         {mark: 'A', min: 0, max: 8, color: '255,0,0', assemble: 'maximum', rear: 28, front: 10, reaction: 2}, 
         {mark: 'B', min: 30, max: 50, color: '0,0,255', assemble: 'maximum', rear: 28, front: 10, reaction: 2}, 

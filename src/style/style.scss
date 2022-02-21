@@ -37,6 +37,10 @@ h6 {
     margin: 0;
 }
 
+p {
+    text-indent: 25px;
+}
+
 body {    
     overflow-x: hidden;
     background-color: $dark;
@@ -134,17 +138,5 @@ button {
     top: 2px;
     // z-index: 101;
     // background-color: whitesmoke;
-  }
-
-  .ert {
-      height: 5px;
-      width: 10px;
-      background-color: white;
-  }
-
-  .rt {
-      width: 1450px;
-      height: 5px;
-    background-color: white;
   }
 

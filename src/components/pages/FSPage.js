@@ -1,9 +1,9 @@
-import FullScreen from "../appFullScreen/FullScreen";
+import FullScreenRender from "../appFullScreen/FullScreen";
 
 const FSPage = () => {
     return (
         <>
-            <FullScreen/>
+            <FullScreenRender/>
         </>
     )
 }

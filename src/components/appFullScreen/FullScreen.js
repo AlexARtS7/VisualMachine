@@ -1,16 +1,24 @@
 import { useSelector } from 'react-redux'
 import { canvasReinit } from '../../services/appProcessor';
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Actions from '../../store/actions/actions';
 
 import './fullScreen.scss';
 
-const FullScreen = () => {
+const FullScreenRender = () => {
     const { fullScreenMode } = Actions();
     const {channels} = useSelector(state => state) 
     const visLab = useSelector(state => state.visLab)
     const visBor = useSelector(state => state.visBor)
     const hrefInit = useSelector(state => state.hrefInit)
     const initHref = useSelector(state => state.initHref)
+
+    const handle = useFullScreenHandle();
+
+    // const startFullscreen = () => {
+    //     handle.enter
+    // }
+    
 
     const elements = channels.map((item, i) => {
         if(hrefInit === !initHref) return null;
@@ -29,16 +37,25 @@ const FullScreen = () => {
     }
 
     return (
-        <div className='fullscreen'>
+        <div>
             <button 
                 className='fullscreen__button' 
-                onClick={() => changefullScreenMode()}>
-                GO BACK TO SETTINGS</button>
+                onClick={handle.enter}>
+                FULL SCREEN MODE</button>
+        <FullScreen handle={handle}>
+            <div className='fullscreen'>
+                <button 
+                    className='fullscreen__button' 
+                    onClick={() => changefullScreenMode()}>
+                    GO BACK TO SETTINGS
+                </button>
                 <div className='app__flex__center'>
                     {elements}
                 </div>                
-        </div>
+            </div>
+        </FullScreen>
+        </div>        
     )
 }
 
-export default FullScreen;
+export default FullScreenRender;
