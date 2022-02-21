@@ -8,7 +8,6 @@ const Actions = () => {
     const dispatch = useDispatch();
     const channels = useSelector(state => state.channels)
     const fullScreen = useSelector(state => state.fullScreen)
-    const hrefInit = useSelector(state => state.hrefInit)
 
     const changeFillStatus = (e) => {        
         localStorage.setItem('fillStatus', e.value)

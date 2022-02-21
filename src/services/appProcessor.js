@@ -61,7 +61,8 @@ function appProceccor() {
     if(ctx && hrefInit === initHref) {
         analyser.getByteFrequencyData(data);
     }
-
+console.log(hrefInit)
+console.log(initHref)
     if(pause === 0 && hrefInit === initHref){
         analyserInitiate();
         pause = 30;
