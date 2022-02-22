@@ -3,11 +3,11 @@
 .ledsettings {
     // width: 100%;
     width: 432px;
-    height: 574px;  // 600
+    height: 583px;  // 600
     margin-bottom: 8px;
     // position: relative;
     &__button {
-        margin: 8px 0px 0px;
+        margin: 10px 0px 0px;
         width: 100%;
         height: 30px;
     }
@@ -29,7 +29,7 @@
         padding: 0 14px;
     }
     &__checkbox {
-        margin-top: 6px;
+        margin-top: 8px;
         cursor: pointer;
         width: 16px;
         height: 16px;
