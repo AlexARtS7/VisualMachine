@@ -23,7 +23,8 @@ const LedSettings = () => {
         const viewId = `view${i}`
         return (
             <div key={i} className='ledsettings__item'>
-                {visLab ? <div className='app__navtext'>Ch: {item.mark}</div> : null}
+                {visLab ? <div className='app__navtext'>
+                    {channels.length < 8 ? 'Канал:' : 'Кл:'} {item.mark}</div> : null}
                 <div className={visBor ? 'app__bkg ledsettings__view' : 'ledsettings__view'} id={viewId}></div>
             </div>    
         )
@@ -39,8 +40,8 @@ const LedSettings = () => {
     return (
             <div id='ledsheet' className='ledsettings app__sheet'>
                 <div className='app__flex__between'>
-                    <div className="app__title">LightSettings</div>
-                    <div className="app__title">channels: {channels.length}</div>
+                    <div className="app__title">Визуальные настройки</div>
+                    <div className="app__title">Всего каналов: {channels.length}</div>
                 </div>
                 <div className="app__line"></div>
                 <div className="app__bkg ledsettings__sheet app__flex__between">
@@ -48,7 +49,7 @@ const LedSettings = () => {
                 </div>
                 <div className='app__flex__between'>
                     <div className='app__center'>
-                        <div className='app__navtext'>Light Up opacity</div>
+                        <div className='app__navtext'>Скорость зажигания</div>
                         <div className='app__bkg ledsettings__text'>{Math.floor(opacityUp*1000)}%</div>
                         <select 
                             className="ledsettings__select" 
@@ -59,7 +60,7 @@ const LedSettings = () => {
                         </select>
                     </div>
                     <div className='app__center'>
-                        <div className='app__navtext'>Light Down opacity</div>
+                        <div className='app__navtext'>Скорость затухания</div>
                         <div className='app__bkg ledsettings__text'>{Math.floor(opacityDown*1000)}%</div>
                         <select 
                             className="ledsettings__select" 
@@ -70,7 +71,7 @@ const LedSettings = () => {
                         </select>
                     </div>
                     <div className='app__center'>
-                        <div className='app__navtext'>Max opacity</div>
+                        <div className='app__navtext'>Максимальная яркость</div>
                         <div className='app__bkg ledsettings__text'>{Math.floor(opacityMax*100)}%</div>
                         <select 
                             className="ledsettings__select" 
@@ -82,30 +83,30 @@ const LedSettings = () => {
                     </div>
                 </div>
                 <div className='app__line'></div>
-                <div className="app__title">ViewSettings</div>
+                <div className="app__title">Варианты отрисовки</div>
                 <div className='app__line'></div>
                 <select 
                     className="ledsettings__selectS" 
                     size={8}
                     value={visSet}
                     onChange={(e) => changeVis(e.target)}>
-                    <option value='none'>None</option>
-                    <option value='radialfromcenter'>Radial gradient from the center</option>
-                    <option value='radialtocenter'>Radial gradient to the center</option>
-                    <option value='linearfromcentervertically'>Linear gradient from the center vertically</option>
-                    <option value='lineartocentervertically'>Linear gradient to the center vertically</option>
-                    <option value='linearfromcenterhorizontally'>Linear gradient from the center horizontally</option>
-                    <option value='lineartocenterhorizontally'>Linear gradient to the center horizontally</option>
+                    <option value='none'>Нет</option>
+                    <option value='radialfromcenter'>Радиальный градиент от центра</option>
+                    <option value='radialtocenter'>Радиальный градиент к центру</option>
+                    <option value='linearfromcentervertically'>Вертикальный градиент от центра</option>
+                    <option value='lineartocentervertically'>Вертикальный градиент к центру</option>
+                    <option value='linearfromcenterhorizontally'>Горизонтальный градиент от центра</option>
+                    <option value='lineartocenterhorizontally'>Горизонтальный градиент к центру</option>
                 </select>
                 <div className='app__line'></div>
-                <label htmlFor='visLab' className='app__title'> Labels_: </label>
+                <label htmlFor='visLab' className='app__title'> Лейблы каналов: </label>
                 <input 
                     className='ledsettings__checkbox' 
                     name='visLab'
                     checked={visLab}
                     onChange={(e) => visLabChange(e.target)}
                     type="checkbox"/> <br/>
-                <label htmlFor='visBor' className='app__title'> Borders: </label>
+                <label htmlFor='visBor' className='app__title'> Рамки каналов: </label>
                 <input 
                     className='ledsettings__checkbox'
                     name='visBor'
@@ -117,7 +118,7 @@ const LedSettings = () => {
                 <button 
                     className='ledsettings__button' 
                     onClick={() => fullScreenMode(1)}>
-                    GO FULLSCREEN</button>       
+                    ПОЛНОЭКРАННЫЙ РЕЖИМ</button>       
             </div>    
     )
 }

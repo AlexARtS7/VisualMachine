@@ -7,7 +7,7 @@ import './startModal.scss'
 const StartModal = ({closeModal}) => {
     let [slide, setSlide] = useState(1)
     const [checked, setChecked] = useState(false)
-    const maxSlide = 4
+    const maxSlide = 5
 
     const selectSlide = () => {
         switch (slide){
@@ -19,6 +19,8 @@ const StartModal = ({closeModal}) => {
                 return <Slide3/>
             case 4:
                 return <Slide4/>
+            case 5:
+                return <Slide5/>
             default://
         }    
     }
@@ -40,7 +42,7 @@ const StartModal = ({closeModal}) => {
     return (
         <div className='startmodal'>
             <div className='startmodal__sheet'>
-                <div className='startmodal__title'>Welcome to SoundVisualMachine!</div>
+                <div className='startmodal__title'>Добро пожаловать в SoundVisualMachine!</div>
                 <div className='app__line'></div>
                     <div className='startmodal__container'>                       
                            {selectSlide()} 
@@ -48,11 +50,11 @@ const StartModal = ({closeModal}) => {
                 <div className='navigation app__flex__between'>
                     <div>
                         <span>{slide}/{maxSlide} </span>
-                        <button className='startmodal__buttons' onClick={() => slideBack()}>back</button>
-                        <button className='startmodal__buttons' onClick={() => slideForward()}>forward</button>
-                        <button className='startmodal__buttons' onClick={() => closeModal(checked)}>close thish window</button>
+                        <button className='startmodal__buttons' onClick={() => slideBack()}>НАЗАД</button>
+                        <button className='startmodal__buttons' onClick={() => slideForward()}>ВПЕРЕД</button>
+                        <button className='startmodal__buttons' onClick={() => closeModal(checked)}>ЗАКРЫТЬ ЭТО ОКНО</button>
                     </div>
-                        <div className='navigation__text'>don't show this window anymore</div>
+                        <div className='navigation__text'>Больше не показывать</div>
                         <input 
                         className='startmodal__checkbox'
                         name='dontShow'
@@ -68,10 +70,8 @@ const StartModal = ({closeModal}) => {
 const Slide1 = () => {
     return (
         <div className='startmodal__content'>
-            <p>Hey! I am glad to see you on the page of my application. At the moment, it is not designed for use on mobile devices. The application will work, but access to some functions will not be possible, since the application has not yet been adapted to small permissions.</p> <br/><br/><br/>
-            <p>Attention!!! For the application to work, you need permission to capture the audio stream from a microphone or stereo mixer (recommended). Please allow the use of input devices on your PC.</p>  <br/><br/><br/> 
-            Here in this welcome window are some instructions on how to use the system settings. Please review them. <br/><br/><br/><br/><br/><br/>
-            by ArtPRO 2022 enginpro@yandex.ru
+            <p>Приветствую всех в моем приложении! Всегда искал что-то похожее на него, но не мог найти. В итоге решил сделать для себя и поделиться с Вами. Приложение обрабатывает звуковой поток и сопровождает цветной индикацией. Можно настроить срабатывание каналов на определенные частоты. В данный момент приложение не расчитано для работы на мобильных устройствах, но я работаю над этим:)</p> <br/><br/>
+            <p>ВНИМАНИЕ! Приложение использует устройство ввода на вашем ПК или телефоне. Для работы необходимо Ваше разрешение на его использование. Захват звука происходит с микрофона или стерео-микшера. Если вы включите устройство ввода стерео-микшер у себя в системе, то звуковой поток будет захватываться со звуковой карты на выходе.</p><br/><br/>Это приветственное окно содержит информацию как работать с приложением, пожалуйста, ознакомтесь с ней. <br/><br/><br/><br/>svmachine.ru 2022 enginpro@yandex.ru
         </div>
     )
 }
@@ -81,7 +81,7 @@ const Slide2 = () => {
     return (
         <div className='startmodal__content'>
             <img src={img1} alt='image' style={{'width' : '100%'}}/>
-            <p>This is a visual representation of the sound stream. You can change the color of the representation, the number of samples (rate: 255, 204, 92), the type of rendering (render), enable peaks.</p><br/><p>The colored bars in the background indicate the range of samples that you have selected in the channels.</p><br/><p>When the number of samples changes, the scale at the bottom will change. It will help you navigate when choosing the necessary frequencies.</p><br/><p>The add channel button allows you to add channels. In total, you can add 10 channels.</p>
+            <p>Это визуальное представление звукового потока. Здесь можно выбрать цвет отрисовки, включить пики, поменять вариант отрисовки, выбрать количество выборок из потока.</p><br/><p>Полосы на заднем фоне служат индикацией выбранного диапазона выборок. Их цвет соответствует цвету канала, который использует данный диапазон. При изменении диапазона расположение полос будет менятся тоже.</p><br/><p>Кнопка "ДОБАВИТЬ НОВЫЙ" добавит новый канал в список каналов и присвоит ему букву A,B,C и т.д. Всего можно добавить 10 каналов.</p>
         </div>
     )
 }
@@ -91,7 +91,7 @@ const Slide3 = () => {
     return (
         <div className='startmodal__content'>
             <img src={img2} alt='image' style={{'width' : '100%'}}/>
-            <p>This is a representation of the channel. Start point and end point allow you to set a range of samples.</p><br/><p>The channel is assembled using two methods. The average value from the selected samples or the maximum value from the selected samples.</p><br/><p>On the visual representation, you can see the assembled frequency, how it works, as well as the peak of operation.</p><br/><p>The rear buffer and the front buffer allow you to adjust the trigger peak for the assembly.</p><br/><p>And the last select allows you to select the reaction rate of the trigger peak. You can also choose the color of the channel and there will also be a button to remove the channel.</p>
+            <p>Это окно канала. В селектах "Начало" и "Конец" можно задать начало и конец диапазона соответственно. Выбранные значения отобразятся в полях "ОТ ВЫБОРКИ" "ПО ВЫБОРКУ" тоже. </p><br/><p>Сборка канала имеет два варианта на выбор. При варианте "Среднее от выбранных" канал соберется из среднего значения всех выборок в выставленом диапазоне. Если будет выбран вариант "Максимальный из выбранных" то будет взято значение самой наибольшей выборки в выставленном диапазоне в текущий момент времени.</p><br/><p>В визуальном представлении канала можно увидеть работу собранного канала из того диапазона, который Вы выставили раньше. Тут же можно увидить полосу срабатывания, которая будет двигаться за максимальным значением сборки. Если сборка пересечет ее, то загорится поле "пик", и подаст сигнал на зажигание индикаторов каналов.</p>
         </div>
     )    
 }
@@ -99,12 +99,22 @@ const Slide3 = () => {
 const Slide4 = () => {
     
     return (
+        <div className='startmodal__content'>
+            <img src={img2} alt='image' style={{'width' : '100%'}}/>
+            <p>Для точной настройки срабатывания используйте настройки буферов. Фронтальный буфер находится от полосы срабатывания справа. Его можно увидеть на поле "Визуальное представление собранного канала" как две маленьких полоски (дальше Маркеры) снизу и сверху. Пока сборка не достигнет маркеров, полоса срабатывания не будет двигаться за сборкой. То же самое касается буфера тыла. Он находится перед полосой срабатывания и позволяет задерживать полосу срабатывания в обратном направлении. </p><br/><br/><p>Селект "Реакция" позволит настроить скорость перемещения полосы срабатывания.</p><br/><br/><p>С помощю кнопок "Цвет" и "Удалить канал" можно поменять цвет канала или удалить канал.</p>
+        </div>
+    )    
+}
+
+const Slide5 = () => {
+    
+    return (
         <div className='startmodal__content app__flex'>
             <div>
              <img src={img3} alt='image' style={{'height' : '400px'}}/>  
             </div>
             <div className='ml'>
-            <p>Here you can customize the visual representation. Set the ignition speed and attenuation speed, as well as the maximum brightness. The type of visual representation of channels. Choose whether to display the name and borders. Well, and a button to switch to full-screen mode.</p><br/><p>Have fun!!! :)</p>
+            <p>Здесь представлены настройки для визуального отображения индикаторов каналов, скорости их зажигания, угасания и максимальной яркости.</p><br/><br/><p>Вы можете отключить рамки и лейблы индикаторов каналов.</p><br/><br/><p>Кнопка "Полноэкранный режим" переведет приложение в режим полного экрана, выведет идикаторы каналов на экран и спрячет настройки.</p><br/><br/><p>На этом все, надеюсь Вам понравится это приложение.</p><br/><br/><p>Желаю весело провести время ;)</p>
             </div>
             
         </div>

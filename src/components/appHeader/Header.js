@@ -5,7 +5,7 @@ const Header = () => {
         <div className="app__sheet appheadersheet">
           <div>
             <div className="appheadersheet__title">SoundVisualMachine</div>
-            <marquee className="appheadersheet__info" direction="left" scrollamount="4">Real-time sound analyzer Sound Machine... Parses the sound stream by frequency and visually plays it. It has settings for the number of channels and their frequency. Setting up visual accompaniment. The possibility of using a computer monitor as a color music installation. Adjust the sound frequencies and their number for clearer visualization.. Еhe author of the application ArtPRO Studio. 2022 Suggestions can be sent to enginpro@yandex.ru</marquee>
+            <marquee className="appheadersheet__info" direction="left" scrollamount="4">Добро пожаловать в SoundVisualMachine!!! Это приложение для анализа звукового потока в реальном времени и дальнейшее его сопровождение цветовой поддержкой - цветомузыка онлайн на экране вашего монитора. приложение имеет простые, но в то же время гибкие настройки деления звукового потока на частоты, а так же удобные настройки визуального цветового сопровождения. я надеюсь вы найдете это приложение интересным для себя. вопросы и пожелания можете направлять на почту: enginpro@yandex.ru  . желаю приятного времяпровождения!;)</marquee>
           </div>
         </div>        
     );

@@ -8,9 +8,10 @@
         margin: 0px 2px;
         font-size: 10px;
         min-width: 20px;
-        padding: 0 14px;
+        padding: 0 4px;
     }
     &__text {
+        width: 80px;
         font-size: 14px;
         user-select: none;
     }

@@ -54,43 +54,43 @@ const VisualDisplay = () => {
     return (
         <div id='visualDisplay' className="app__sheet visualdisplaysheet">
             <div className='app__flex__between'>
-            <div className="app__title">VisualDisplay</div>
+            <div className="app__title">Отрисовка потока</div>
                 <div>
                     <select 
                     defaultValue={rate}
                     onChange={(e) => onChangeRate(e.target)}>
-                        <option value="255">Mode: 255 samples</option>
-                        <option value="204">Mode: 204 samples</option>
-                        <option value="92">Mode: 92 samples</option>
+                        <option value="255">Диапазон: 255 выборок из потока</option>
+                        <option value="204">Диапазон: 204 выборки из потока</option>
+                        <option value="92">Диапазон: 92 выборки из потока</option>
                         {/* <option value="44">Mode: 45 samples</option> */}
                     </select>
                     <select 
                     defaultValue={fillStatus}
                     onChange={(e) => changeFillStatus(e.target)}>
-                        <option value="1">Render: Fill</option>
-                        <option value="0">Render: Stroke</option>
+                        <option value="1">Вариант отрисовки: Заливка</option>
+                        <option value="0">Вариант отрисовки: Контуры</option>
                     </select>
                     <select 
                     defaultValue={renderColor}
                     onChange={(e) => changeColor(e.target)}> 
-                        <option value="0,0,255">Color: Blue</option>
-                        <option value="255,0,0">Color: Red</option>
-                        <option value="0,255,0">Color: Green</option>
-                        <option value="0,255,255">Color: Aqua</option>
-                        <option value="255,255,0">Color: Yellow</option>
-                        <option value="0, 100, 0">Color: DarkGreen</option>
-                        <option value="128, 128, 0">Color: Olive</option>
-                        <option value="255, 165, 0">Color: Orange</option>
-                        <option value="95, 158, 160">Color: CadetBlue</option>
-                        <option value="128, 0, 128">Color: Purple</option>
-                        <option value="154, 205, 50">Color: YellowGreen</option>
-                        <option value="189, 183, 107">Color: DarkKhaki</option>
+                        <option value="0,0,255">Цвет: Синий</option>
+                        <option value="255,0,0">Цвет: Красный</option>
+                        <option value="0,255,0">Цвет: Зеленый</option>
+                        <option value="0,255,255">Цвет: Аква</option>
+                        <option value="255,255,0">Цвет: Желтый</option>
+                        <option value="0, 100, 0">Цвет: Тёмнозеленый</option>
+                        <option value="128, 128, 0">Цвет: Оливковый</option>
+                        <option value="255, 165, 0">Цвет: Оранж</option>
+                        <option value="95, 158, 160">Цвет: Кад.Синий</option>
+                        <option value="128, 0, 128">Цвет: Пурпурный</option>
+                        <option value="154, 205, 50">Цвет: ЖелтоЗеленый</option>
+                        <option value="189, 183, 107">Цвет: НочнойКаи</option>
                     </select>
                     <select 
                     defaultValue={peaksStatus}
                     onChange={(e) => changePeaksStatus(e.target)}>
-                        <option value="1">Peaks: Yes</option>
-                        <option value="0">Peaks: No</option>
+                        <option value="1">Пики: Да</option>
+                        <option value="0">Пики: Нет</option>
                     </select>
                 </div>
             </div>
@@ -100,8 +100,8 @@ const VisualDisplay = () => {
             </div> 
             <div className='app__line'></div>  
             <div>
-                <span className="app__title">Controls:</span>
-                <button onClick={addChannels}>ADDNEWCHANNEL</button>
+                <span className="app__title">Управление каналами:</span>
+                <button onClick={addChannels}>ДОБАВИТЬ НОВЫЙ</button>
             </div>         
         </div>
     )

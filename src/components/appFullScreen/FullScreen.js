@@ -25,7 +25,7 @@ const FullScreenRender = () => {
         const viewId = `view${i}`
         return (
             <div key={i} className='fullscreen__item'>
-                {visLab ? <div className='app__navtext'>Ch: {item.mark}</div> : null}
+                {visLab ? <div className='app__navtext'>КАНАЛ: {item.mark}</div> : null}
                 <div className={visBor ? 'app__bkg fullscreen__view' : 'fullscreen__view'} id={viewId}></div>
             </div>    
         )
@@ -41,13 +41,13 @@ const FullScreenRender = () => {
             <button 
                 className='fullscreen__button' 
                 onClick={handle.enter}>
-                FULL SCREEN MODE</button>
+                НА ВЕСЬ ЭКРАН</button>
         <FullScreen handle={handle}>
             <div className='fullscreen'>
                 <button 
                     className='fullscreen__button' 
                     onClick={() => changefullScreenMode()}>
-                    GO BACK TO SETTINGS
+                    ВЕРНУТЬСЯ К НАСТРОЙКАМ
                 </button>
                 <div className='app__flex__center'>
                     {elements}
