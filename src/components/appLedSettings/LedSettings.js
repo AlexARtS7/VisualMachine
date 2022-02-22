@@ -113,10 +113,11 @@ const LedSettings = () => {
                     onChange={(e) => visBorChange(e.target)}
                     type="checkbox"/>
                 <div className='app__line'></div>
+            
                 <button 
                     className='ledsettings__button' 
                     onClick={() => fullScreenMode(1)}>
-                    GO FULLSCREEN</button>
+                    GO FULLSCREEN</button>       
             </div>    
     )
 }
