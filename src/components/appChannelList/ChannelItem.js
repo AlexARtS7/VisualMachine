@@ -54,7 +54,7 @@ const ChannelItem = ({id}) => {
                 {id > 0 ? <button 
                         className='closebutton' 
                         id={id}
-                        onClick={(e) => deleteChannel(e.target)}
+                        onClick={(e) => deleteChannel(e.target.id)}
                         >УДАЛИТЬ КАНАЛ</button>: null}
                     
                 </div>              

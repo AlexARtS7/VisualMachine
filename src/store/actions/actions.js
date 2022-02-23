@@ -162,7 +162,7 @@ const Actions = () => {
     
     const deleteChannel = (i) => {
         const tempArr = channels;
-        tempArr.splice(i, 1);   
+        tempArr.splice(+i, 1);   
 
         dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })
         initMarkers();
