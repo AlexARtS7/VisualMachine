@@ -67,7 +67,7 @@
 .ml {
     margin-left: 10px;
 }
-.navigation {
+.navigation-1 {
     margin: 20px;
         color: white;
         padding: 10px 20px;
@@ -79,3 +79,58 @@
         font-size: 14px;
     }
 }
+
+.navigation-2 {
+    margin: 20px;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: 0.5px solid rgb(134, 134, 134);
+        height: 100px;
+        display: none;
+    &__text {
+        // margin-left: 250px;
+        font-size: 14px;
+    }
+    &__top {        
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 1070px) {
+    .startmodal {
+        display: none;
+    }
+}
+
+// @media (max-width: 800px) {
+//     .startmodal {
+//     &__sheet {
+//         margin-left: -350px;
+//         margin-top: -400px;
+//         width: 700px;
+//         height: 800px;
+//     }
+//     &__container{
+//         margin: 10px;
+//         height: 550px;
+//     }
+//     &__title {
+//         margin-left: 190px;
+//     }
+//     &__buttons {
+//         font-size: 18px;
+//         margin: 0 10px;
+//         min-width: 80px;
+//         letter-spacing: 1px;
+//         padding: 6px 14px;
+        
+//     }
+// }
+//     .navigation-1 {
+//         display: none;
+//     }
+//     .navigation-2 {
+//         display: block;
+//     }
+// }
