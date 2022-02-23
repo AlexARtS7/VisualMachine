@@ -21,6 +21,7 @@ const LedSettings = () => {
     
     const elements = channels.map((item, i) => {
         const viewId = `view${i}`
+        console.log(viewId)
         return (
             <div key={i} className='ledsettings__item'>
                 {visLab ? <div className='app__navtext'>

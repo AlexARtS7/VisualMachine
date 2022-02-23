@@ -73,7 +73,7 @@ function appProceccor() {
         };
         pause -= 1;
     }       
-
+    
     channels.forEach((item, i) => {        
         const div = document.getElementById(`div${i}`);
             sampleDrawing(data, item, i, div, opacityUp, opacityDown, opacityMax, visSet);
@@ -82,7 +82,28 @@ function appProceccor() {
     if( document.getElementById('canvasDisplay')  && hrefInit === initHref ){
         if(onceStartRender) {canvasRender();onceStartRender = false;}
         if(data) canvasDraw(data, rate, fillStatus, renderColor, peaksStatus, hrefInit, initHref);
-    }    
+    }  
+    
+    const back = document.getElementById('Header');
+    if(back){
+    const compensating = document.getElementById('compensating');
+    const targetA = document.getElementById('ledsheet');
+    const targetAA = document.getElementById('ledsheetmini');
+    const targetB = document.getElementById('visualDisplay');
+    const pos = Math.floor(back.getBoundingClientRect().top);
+
+    if (pos <= 0) {
+        if(targetA) targetA.className = 'ledsettings app__sheet sticky';
+        if(targetAA) targetAA.className = 'ledsettingsmini app__sheet stickymini';
+        if(targetB) targetB.className = 'app__sheet visualdisplaysheet sticky'
+        compensating.className = 'compensating'
+        } else {
+        if(targetA) targetA.className = 'ledsettings app__sheet';
+        if(targetAA) targetAA.className = 'ledsettingsmini app__sheet';
+        if(targetB)targetB.className = 'app__sheet visualdisplaysheet'
+        compensating.className = ''
+        }
+    }
 }
 
 export { appProceccor, initState, analyserInitiate, canvasReinit };

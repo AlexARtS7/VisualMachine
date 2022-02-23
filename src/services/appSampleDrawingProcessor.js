@@ -51,7 +51,7 @@ const sampleDrawing = (data, item, id, div, opacityUp, opacityDown, opacityMax, 
             if(colorOpacity[id] < 0) colorOpacity[id] = 0;
             if(viewOpacity[id] < 0) viewOpacity[id] = 0;
         }
-        
+       
         const channelVisDiv = document.getElementById(`view${id}`)
         if(channelVisDiv){
             switch (visSet){

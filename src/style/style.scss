@@ -137,14 +137,6 @@ button {
     }
 }
 
-.ledtype-1 {
-    display: block;
-}
-
-.ledtype-2 {
-    display: none;
-}
-
 .sticky {
     position: fixed;
     top: 2px;
@@ -162,14 +154,6 @@ button {
 
 
 @media (max-width: 1500px) {
-    .ledtype-1 {
-        display: none;
-    }
-
-    .ledtype-2 {
-        display: block;
-    }
-
     .wrapper {
         height: 100%;
         margin-left: -525px; 
@@ -180,12 +164,8 @@ button {
         height: 390px;
     }
 
-    .sticky {
-        top: 2px;
-      }
-    
     .stickymini {
-        top: 222px;
+        top: 232px;
       }
 }
 
