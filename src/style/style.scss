@@ -198,11 +198,14 @@ body {
 }
 .sticky {
     position: static;
-  }
+}
 
 .stickymini {
     position: static;
-  }
+}
+.over-y-hidden {
+    overflow-y: auto;
+}
 }
 
 @media (max-width: 850px) {
