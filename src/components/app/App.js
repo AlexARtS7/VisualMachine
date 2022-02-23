@@ -13,7 +13,6 @@ const App = () => {
   const fullScreen = useSelector(state => state.fullScreen)
   const startWindowsShow = localStorage.getItem('startWindowShow')  === 'false' ? false : true  
   const [showModal, setShowModal] = useState(startWindowsShow)
-  
 
   const closeModal = (checked) => {
     setShowModal(false)
@@ -21,13 +20,20 @@ const App = () => {
       localStorage.setItem('startWindowShow', false)
     }
   }
+ 
+  if (showModal){
+    document.body.className = 'over-y-hidden';
+  } else {
+    document.body.className = '';
+  }
 
   return (
     <div className="app">
         <main className={fullScreen === 0 ? 'wrapper': null}>
             <Suspense fallback="Loading...">
+             
               {fullScreen === 0 ? <MainPage/> : <FSPage/>} 
-              {showModal ? <StartModal closeModal={closeModal}/> : null} 
+              {showModal ? <StartModal closeModal={closeModal}/> : null}
             </Suspense>                   
         </main>      
     </div>
