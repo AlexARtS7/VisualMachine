@@ -25,7 +25,11 @@ const LedSettingsMini = () => {
             <div key={i} className='ledsettingsmini__item'>
                 {visLab ? <div className='app__navtext'>
                     {channels.length < 8 ? 'Канал:' : 'Кл:'}<br/>{item.mark}</div> : null}
-                <div className={visBor ? 'app__bkg ledsettingsmini__view' : 'ledsettingsmini__view'} id={viewId}></div>
+                    <div className={visBor ? 'app__bkg' : ''} >
+                        <div className={visLab ? 'ledsettingsmini__view' : 'ledsettingsmini__viewlarge'} 
+                             id={viewId}>
+                        </div>
+                    </div>                
             </div>    
         )
     });

@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { PopoverPicker } from '../appColorPicker/PopoverPicker';
 import Actions from '../../store/actions/actions';
 
 const ChannelItem = ({id}) => {
@@ -12,7 +14,8 @@ const ChannelItem = ({id}) => {
             changeMaxChannel} = Actions();
 
     const rate = useSelector(state => state.rate)
-    const {channels} = useSelector(state => state)   
+    const {channels} = useSelector(state => state)  
+    const [color, setColor] = useState(channels[id].color)
     
     const divId = `div${id}`;
     const inId = `in${id}`;
@@ -29,34 +32,28 @@ const ChannelItem = ({id}) => {
         } return arr               
     }   
 
+    useEffect(() => {
+        changeSampleColor(color, id)
+    }, [color])
+
     return (
         <div className="app__sheet channellist">
             <div className='app__flex__between'>
                 <div className="app__title">Канал : {channels[id].mark}</div>
-                <div>
-                <select
-                    value={channels[id].color}
-                    id={id}
-                    onChange={(e) => changeSampleColor(e.target, id)}>
-                        <option value="0,0,255">Цвет: Синий</option>
-                        <option value="255,0,0">Цвет: Красный</option>
-                        <option value="0,255,0">Цвет: Зеленый</option>
-                        <option value="0,255,255">Цвет: Аква</option>
-                        <option value="255,255,0">Цвет: Желтый</option>
-                        <option value="0, 100, 0">Цвет: Тёмнозеленый</option>
-                        <option value="128, 128, 0">Цвет: Оливковый</option>
-                        <option value="255, 165, 0">Цвет: Оранж</option>
-                        <option value="95, 158, 160">Цвет: Кад.Синий</option>
-                        <option value="128, 0, 128">Цвет: Пурпурный</option>
-                        <option value="154, 205, 50">Цвет: ЖелтоЗеленый</option>
-                        <option value="189, 183, 107">Цвет: НочнойКаи</option>
-                </select>
-                {id > 0 ? <button 
-                        className='closebutton' 
-                        id={id}
-                        onClick={(e) => deleteChannel(e.target.id)}
-                        >УДАЛИТЬ КАНАЛ</button>: null}
-                    
+                <div className='app__flex'>
+                    <div>
+                        <section className="small example">
+                            <PopoverPicker color={color} onChange={setColor}/>
+                        </section>
+                    </div>
+                    <div>
+                        {id > 0 ? <button 
+                            className='closebutton' 
+                            id={id}
+                            onClick={(e) => deleteChannel(e.target.id)}
+                            >УДАЛИТЬ КАНАЛ</button>: null
+                        }
+                    </div>                   
                 </div>              
             </div>            
             <div className="app__line"></div>
@@ -114,7 +111,9 @@ const ChannelItem = ({id}) => {
                 </div>
                 <div className="app__center ml">
                     <div className='app__navtext'>Пик</div>
-                    <div className='channellist__triggeringarea app__bkg' id={trId}></div> 
+                    <div className='app__bkg'>
+                        <div className='channellist__triggeringarea' id={trId}></div>
+                    </div>                     
                 </div>            
                     <div className="app__center ml">
                         <div className="app__navtext">Тыл</div>

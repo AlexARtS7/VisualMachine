@@ -26,7 +26,10 @@ const FullScreenRender = () => {
         return (
             <div key={i} className='fullscreen__item'>
                 {visLab ? <div className='app__navtext'>КАНАЛ: {item.mark}</div> : null}
-                <div className={visBor ? 'app__bkg fullscreen__view' : 'fullscreen__view'} id={viewId}></div>
+                <div className={visBor ? 'app__bkg' : ''}>
+                    <div className='fullscreen__view' 
+                    id={viewId}></div>
+                </div>
             </div>    
         )
     });

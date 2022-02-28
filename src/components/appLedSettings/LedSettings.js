@@ -21,12 +21,15 @@ const LedSettings = () => {
     
     const elements = channels.map((item, i) => {
         const viewId = `view${i}`
-        console.log(viewId)
         return (
             <div key={i} className='ledsettings__item'>
                 {visLab ? <div className='app__navtext'>
                     {channels.length < 8 ? 'Канал:' : 'Кл:'} {item.mark}</div> : null}
-                <div className={visBor ? 'app__bkg ledsettings__view' : 'ledsettings__view'} id={viewId}></div>
+                    <div className={visBor ? 'app__bkg' : ''}>
+                        <div className={visLab ? 'ledsettings__view':'ledsettings__viewlarge'} 
+                             id={viewId}>
+                        </div>
+                    </div>
             </div>    
         )
     });
@@ -37,7 +40,7 @@ const LedSettings = () => {
             arr.push(<option key={i} value={i}>{i}</option>)  
         } return arr               
     }   
-
+    
     return (
             <div id='ledsheet' className='ledsettings app__sheet'>
                 <div className='app__flex__between'>

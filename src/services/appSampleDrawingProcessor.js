@@ -51,36 +51,37 @@ const sampleDrawing = (data, item, id, div, opacityUp, opacityDown, opacityMax, 
             if(colorOpacity[id] < 0) colorOpacity[id] = 0;
             if(viewOpacity[id] < 0) viewOpacity[id] = 0;
         }
-       
+    
         const channelVisDiv = document.getElementById(`view${id}`)
         if(channelVisDiv){
+            channelVisDiv.style.opacity = viewOpacity[id]
             switch (visSet){
                 case 'none':
-                    channelVisDiv.style.background = `rgba(${item.color}, ${viewOpacity[id]})`;
+                    channelVisDiv.style.background = item.color
                 break;
                 case 'radialfromcenter':
                     channelVisDiv.style.background = 
-                    `radial-gradient(rgba(${item.color}, ${viewOpacity[id]}), #000000)`;                
+                    `radial-gradient(${item.color}, #000000)`;                
                 break;
                 case 'radialtocenter':
                     channelVisDiv.style.background = 
-                    `radial-gradient( #000000, rgba(${item.color}, ${viewOpacity[id]}))`;                
+                    `radial-gradient( #000000, ${item.color})`;                
                 break;   
                 case 'linearfromcentervertically':
                     channelVisDiv.style.background = 
-                    `linear-gradient(to left, #000000, rgba(${item.color}, ${viewOpacity[id]}), #000000) `;              
+                    `linear-gradient(to left, #000000, ${item.color}, #000000) `;              
                 break;    
                 case 'lineartocentervertically':
                     channelVisDiv.style.background = 
-                    `linear-gradient(to left, rgba(${item.color}, ${viewOpacity[id]}), #000000, rgba(${item.color}, ${viewOpacity[id]})) `;                              
+                    `linear-gradient(to left, ${item.color}, #000000, ${item.color}) `;                              
                 break;  
                 case 'lineartocenterhorizontally':
                     channelVisDiv.style.background = 
-                    `linear-gradient(to top, rgba(${item.color}, ${viewOpacity[id]}), #000000, rgba(${item.color}, ${viewOpacity[id]})) `;                              
+                    `linear-gradient(to top, ${item.color}, #000000, ${item.color}) `;                              
                 break;     
                 case 'linearfromcenterhorizontally':
                     channelVisDiv.style.background = 
-                    `linear-gradient(to top, #000000, rgba(${item.color}, ${viewOpacity[id]}), #000000) `;              
+                    `linear-gradient(to top, #000000, ${item.color}, #000000) `;              
                 break; 
                 default://
             } 
@@ -94,10 +95,13 @@ const sampleDrawing = (data, item, id, div, opacityUp, opacityDown, opacityMax, 
             document.getElementById(`uf${id}`).style.left = `${xPos[id]+item.front}px`;
             document.getElementById(`in${id}`).style.left = `${xPos[id]}px`;
     
-            document.getElementById(`tr${id}`).style.background = `radial-gradient(rgba(${item.color}, ${colorOpacity[id]}), #000000)`;
-            
+            // document.getElementById(`tr${id}`).style.background = `radial-gradient(rgba(${item.color}, ${colorOpacity[id]}), #000000)`;
+            document.getElementById(`tr${id}`).style.opacity = colorOpacity[id];
+            document.getElementById(`tr${id}`).style.background = `radial-gradient(${item.color}, #000000)`;
+
             div.style.width = `${mass}px`;             
-            div.style.background = `linear-gradient(to top, #000000, rgb(${item.color}), #000000)`;   
+            // div.style.background = `linear-gradient(to top, #000000, rgb(${item.color}), #000000)`;   
+            div.style.background = `linear-gradient(to top, #000000, ${item.color} , #000000)`;  
         }
             
 }

@@ -43,9 +43,15 @@ const Actions = () => {
         dispatch({type: 'CHANGE_VISMODE', rate: e.value})
     }
 
-    const changeColor = (e) => {        
-        localStorage.setItem('renderColor', e.value)
-        dispatch({type: 'CHANGE_COLOR', color: e.value})
+    const changeSuppression = (e) => {        
+        localStorage.setItem('suppression', e.value)
+        dispatch({type: 'CHANGE_SUPPRESSION', suppression: e.value})
+    }
+
+    const changeColor = (e) => {    
+        // const res = JSON.stringify(e).replace(/[{rgb:"}]/g, '') 
+        localStorage.setItem('renderColor', e)
+        dispatch({type: 'CHANGE_COLOR', color: e})
     }
 
     const changePeaksStatus = (e) => {        
@@ -53,9 +59,9 @@ const Actions = () => {
         dispatch({type: 'CHANGE_PEAKS_STATUS', peaks: e.value})
     }
 
-    const changeSampleColor = (e, i) => {
+    const changeSampleColor = (color, i) => {
         const tempArr = channels;
-        tempArr[i].color = e.value
+        tempArr[i].color = color
 
         dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })
         initMarkers();
@@ -89,7 +95,7 @@ const Actions = () => {
         dispatch({type: 'CHANGE_CHANNEL_ARRAY', tempArr: tempArr })
     }
 
-    const changeLightUp = (e) => {        
+    const changeLightUp = (e) => {   
         localStorage.setItem('opacityUp', e.value/1000)
         dispatch({type: 'CHANGE_LIGHT_UP', value: e.value})
         initState();
@@ -146,7 +152,7 @@ const Actions = () => {
             const tempArr = channels;
             tempArr.push (
                 {mark: res, min: 0, max: 0, 
-                color: '0,255,0', 
+                color: '#ffffff', 
                 assemble: 'maximum', rear: 28, 
                 front: 10, reaction: 2})
          
@@ -191,6 +197,7 @@ const Actions = () => {
             changeLightUp,
             changeLightDown,
             changeVis,
+            changeSuppression,
             visBorChange,
             visLabChange,
             changeLightMax,

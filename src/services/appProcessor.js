@@ -5,24 +5,26 @@ import store from '../store/store';
 var analyser,
     renderColor,
     rate,
+    suppression,
     peaksStatus,
     fillStatus,
     channels,
     src,
     ctx = null,
     pause = 0,
-    opacityUp = 0.05,
-    opacityDown = 0.01, 
+    opacityUp = 0.5,
+    opacityDown = 0.1, 
     opacityMax = 1,
     hrefInit,
     initHref,
     onceStartRender = true,
     visSet = 'radialfromcenter',
-    data = new Uint8Array(256);
+    data = new Uint8Array(1024);
 
 function initState() {
     renderColor = store.getState().renderColor
     rate = store.getState().rate
+    suppression = store.getState().suppression
     peaksStatus = store.getState().peaksStatus
     fillStatus = store.getState().fillStatus
     opacityUp = store.getState().opacityUp
@@ -81,7 +83,7 @@ function appProceccor() {
    
     if( document.getElementById('canvasDisplay')  && hrefInit === initHref ){
         if(onceStartRender) {canvasRender();onceStartRender = false;}
-        if(data) canvasDraw(data, rate, fillStatus, renderColor, peaksStatus, hrefInit, initHref);
+        if(data) canvasDraw(data, rate, fillStatus, renderColor, peaksStatus, hrefInit, initHref, suppression);
     }  
     
     const back = document.getElementById('Header');

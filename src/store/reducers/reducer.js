@@ -34,6 +34,9 @@ const reducer = (state = initialState, action) => {
 
         case 'CHANGE_VISMODE':
             return { ...state, rate: +action.rate }  
+
+        case 'CHANGE_SUPPRESSION':
+            return { ...state, suppression: +action.suppression }  
             
         case 'CHANGE_HREFINIT':
             return { ...state, hrefInit: action.hrefInit, initHref: action.initHref }        

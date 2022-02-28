@@ -1,18 +1,21 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { initState } from '../../services/appProcessor';
+import { PopoverPicker } from '../appColorPicker/PopoverPicker';
 
 import Actions from '../../store/actions/actions';
 
 import './visualDisplay.scss';
 
 const VisualDisplay = () => {
-    const {changeFillStatus, onChangeRate, changeColor, changePeaksStatus, addChannels} = Actions();
-
+    const {changeFillStatus, onChangeRate, changeSuppression, changeColor, changePeaksStatus, addChannels} = Actions();
     const rate = useSelector(state => state.rate)
     const fillStatus = useSelector(state => state.fillStatus)
     const renderColor = useSelector(state => state.renderColor)
     const peaksStatus = useSelector(state => state.peaksStatus)
+    const suppression = useSelector(state => state.suppression)
+    
+    const [color, setColor] = useState(renderColor)
 
     const freq = () => {
         let cons
@@ -27,10 +30,20 @@ const VisualDisplay = () => {
             257, 8, '........', '..', 
             206, 6, '.......', '.....',
             93, 2, '....', '..',
-            46, 2, '..................', '..']
+            512, 14, '.....', '..',
+            1024, 24, '..', '..']
         
         let num = 0
         switch (rate) {
+            case 1024:
+                num = 4                
+            break;
+            case 512:
+                num = 3                
+            break;
+            case 255:
+                num = 0                
+            break;
             case 204:
                 num = 1                
             break;
@@ -49,49 +62,56 @@ const VisualDisplay = () => {
 
     useEffect(()=>{
         initState();
+        changeColor(color)
     })   
 
     return (
         <div id='visualDisplay' className="app__sheet visualdisplaysheet">
             <div className='app__flex__between'>
             <div className="app__title">Отрисовка потока</div>
-                <div>
-                    <select 
-                    defaultValue={rate}
-                    onChange={(e) => onChangeRate(e.target)}>
-                        <option value="255">Диапазон: 255 выборок из потока</option>
-                        <option value="204">Диапазон: 204 выборки из потока</option>
-                        <option value="92">Диапазон: 92 выборки из потока</option>
-                        {/* <option value="44">Mode: 45 samples</option> */}
-                    </select>
-                    <select 
-                    defaultValue={fillStatus}
-                    onChange={(e) => changeFillStatus(e.target)}>
-                        <option value="1">Вариант отрисовки: Заливка</option>
-                        <option value="0">Вариант отрисовки: Контуры</option>
-                    </select>
-                    <select 
-                    defaultValue={renderColor}
-                    onChange={(e) => changeColor(e.target)}> 
-                        <option value="0,0,255">Цвет: Синий</option>
-                        <option value="255,0,0">Цвет: Красный</option>
-                        <option value="0,255,0">Цвет: Зеленый</option>
-                        <option value="0,255,255">Цвет: Аква</option>
-                        <option value="255,255,0">Цвет: Желтый</option>
-                        <option value="0, 100, 0">Цвет: Тёмнозеленый</option>
-                        <option value="128, 128, 0">Цвет: Оливковый</option>
-                        <option value="255, 165, 0">Цвет: Оранж</option>
-                        <option value="95, 158, 160">Цвет: Кад.Синий</option>
-                        <option value="128, 0, 128">Цвет: Пурпурный</option>
-                        <option value="154, 205, 50">Цвет: ЖелтоЗеленый</option>
-                        <option value="189, 183, 107">Цвет: НочнойКаи</option>
-                    </select>
-                    <select 
-                    defaultValue={peaksStatus}
-                    onChange={(e) => changePeaksStatus(e.target)}>
-                        <option value="1">Пики: Да</option>
-                        <option value="0">Пики: Нет</option>
-                    </select>
+                <div className='app__flex'>
+                    <section className="small example">
+                        <PopoverPicker color={color} onChange={setColor}/>
+                    </section>
+                    <section>
+                        <select 
+                            defaultValue={fillStatus}
+                            onChange={(e) => changeFillStatus(e.target)}>
+                                <option value="1">Вариант отрисовки: Заливка</option>
+                                <option value="0">Вариант отрисовки: Контуры</option>
+                        </select>
+                    </section>
+                    <section>
+                        <select 
+                            defaultValue={peaksStatus}
+                            onChange={(e) => changePeaksStatus(e.target)}>
+                                <option value="1">Пики: Да</option>
+                                <option value="0">Пики: Нет</option>
+                        </select>
+                    </section>
+                    <section>
+                        <select 
+                            defaultValue={suppression}
+                            onChange={(e) => changeSuppression(e.target)}>
+                                <option value="0">Подавление: Нет</option>
+                                <option value="1.2">Подавление: 1.2</option>
+                                <option value="1.5">Подавление: 1.5</option>
+                                <option value="1.8">Подавление: 1.8</option>
+                                <option value="2.0">Подавление: 2.0</option>
+                        </select>
+                    </section>
+                    <section>
+                        <select 
+                            defaultValue={rate}
+                            onChange={(e) => onChangeRate(e.target)}>
+                                <option value="1024">Диапазон: 1024 выборок из потока</option>
+                                <option value="512">Диапазон: 512 выборок из потока</option>
+                                <option value="255">Диапазон: 255 выборок из потока</option>
+                                <option value="204">Диапазон: 204 выборки из потока</option>
+                                <option value="92">Диапазон: 92 выборки из потока</option>
+                                {/* <option value="44">Mode: 45 samples</option> */}
+                        </select>
+                    </section>
                 </div>
             </div>
             <canvas id='canvasDisplay'></canvas>
