@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import Header from "../appHeader/Header";
 import VisualDisplay from "../appVisualDisplay/VisualDisplay";
 import ChannelList from "../appChannelList/ChannelList";

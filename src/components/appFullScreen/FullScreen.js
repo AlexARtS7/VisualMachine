@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux'
 import { canvasReinit } from '../../services/appProcessor';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";

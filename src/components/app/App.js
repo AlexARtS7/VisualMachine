@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { useSelector } from "react-redux"
 import { analyserInitiate } from "../../services/appProcessor";
 import { useState } from "react";

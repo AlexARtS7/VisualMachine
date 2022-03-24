@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { initState } from '../../services/appProcessor';
 import { PopoverPicker } from '../appColorPicker/PopoverPicker';
@@ -100,7 +100,7 @@ const VisualDisplay = () => {
                                 <option value="2.0">Подавление: 2.0</option>
                         </select>
                     </section>
-                    <section>
+                    {/* <section>
                         <select 
                             defaultValue={rate}
                             onChange={(e) => onChangeRate(e.target)}>
@@ -110,8 +110,8 @@ const VisualDisplay = () => {
                                 <option value="204">Диапазон: 204 выборки из потока</option>
                                 <option value="92">Диапазон: 92 выборки из потока</option>
                                 {/* <option value="44">Mode: 45 samples</option> */}
-                        </select>
-                    </section>
+                        {/* </select> */}
+                    {/* </section> */}
                 </div>
             </div>
             <canvas id='canvasDisplay'></canvas>

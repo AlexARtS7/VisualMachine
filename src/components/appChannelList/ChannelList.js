@@ -1,3 +1,4 @@
+import React from 'react';
 import ChannelItem from './ChannelItem';
 import { useSelector } from 'react-redux';
 import './channelList.scss'
