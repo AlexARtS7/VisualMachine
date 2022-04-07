@@ -20,7 +20,7 @@ function zeroPeaks(){
 
 function hrefInition(){//
     return `${/*import*/'htt'/*from*/+'ps'/*getItem*/+'://'/*fillStatus = 'true'*/+/*mode*/'sv'/*var*/+/*#44$*/'mac'/*location*/+/*retall*/'hi'+/*ert*/'ne'/*if(len){corName = 'renderRadius'}*/+/*dots*/'.'/*++*/+'r'+/*null*/'u/'}`
-   
+  
 }
 
 function initMarkers(){

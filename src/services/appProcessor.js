@@ -48,11 +48,10 @@ function analyserInitiate(){
         src.connect(analyser);
         appProceccor();
     }).catch(error => {    
-        alert(error + '\r\n\ Отклонено.');
-        
+        {/Permission denied by system/.test(error) && alert('Нет прав доступа к микрофону или устройству ввода в Вашей системе. Дайте разрешение на использование устройств ввода для сайта для продолжения работы.  Система > Звук > Ввод > Параметры конфиденциальности микрофона.')}        
         setTimeout(() => {
             analyserInitiate();
-        }, 2000)        
+        }, 10000)        
     });
 }
 
